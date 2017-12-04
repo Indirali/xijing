@@ -1,0 +1,14 @@
+spring:
+    profiles:
+        active: dev
+    jpa:
+        database-platform: org.hibernate.dialect.MySQLDialect
+        show-sql: true
+
+logging:
+  file: logs/xijing.log
+  config: classpath:logback-spring.xml
+  level:
+#     org.springframework: DEBUG
+     org.hibernate: DEBUG
+     org.hibernate.type.descriptor.sql: TRACE

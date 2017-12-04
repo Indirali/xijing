@@ -1,0 +1,29 @@
+archivesBaseName = "xijing-service"
+version = "1.0-SNAPSHOT"
+
+apply plugin: 'java'
+sourceCompatibility = 1.8
+
+dependencies {
+
+    compile project(':xijing-common')
+
+    compile libraries.'spring-boot-starter-data-redis'
+    compile libraries.'yunpian-java-sdk'
+    compile libraries.'mysql-connector-java'
+    compile libraries.'druid'
+    compile libraries.'hibernate-validator'
+    compile libraries.'validation-api'
+    compile libraries.'json-lib'
+    compile libraries.'ezmorph'
+    compile libraries.'httpmime'
+    compile libraries.'commons-beanutils'
+    compile libraries.'commons-lang'
+    compile libraries.'qiniu-java-sdk'                  // 七牛
+    compile libraries.'zxing-core'                      // zxing
+}
+
+// 此模块不需要 Spring Boot 插件支持
+bootRepackage {
+    enabled = false
+}

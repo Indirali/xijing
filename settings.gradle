@@ -1,0 +1,7 @@
+rootProject.name = 'xijing'
+
+include 'xijing-admin'
+include 'xijing-common'
+include 'xijing-service'
+include 'xijing-web'
+

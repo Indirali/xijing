@@ -1,0 +1,92 @@
+ext.versions = [
+        springBoot: "1.5.8.RELEASE",
+        logback   : "1.2.3",
+        slf4j     : "1.7.25",
+]
+
+ext.libraries = [
+
+        // Servlet
+        "servlet-api"                   : "javax.servlet:javax.servlet-api:3.1.0",
+        "jsp-api"                       : "javax.servlet:jsp-api:2.0",
+        "jstl"                          : "javax.servlet:jstl:1.2",
+        "standard"                      : "taglibs:standard:1.1.2",
+
+        // Java X
+        "persistence-api"               : 'javax.persistence:persistence-api:1.0.2',
+        "validation-api"                : "javax.validation:validation-api:2.0.0.Final",
+        "jta"                           : "javax.transaction:jta:1.1",
+
+        // mybatis
+        "mapper-spring-boot-starter"    : "tk.mybatis:mapper-spring-boot-starter:1.1.5",
+
+        // MySQL
+        "mysql-connector-java"          : "mysql:mysql-connector-java:5.1.44",
+        "druid"                         : "com.alibaba:druid:1.1.5",
+
+        // Logback
+        "logback-classic"               : "ch.qos.logback:logback-classic:${versions.logback}",
+        "logback-core"                  : "ch.qos.logback:logback-core:${versions.logback}",
+        "jcl-over-slf4j"                : "org.slf4j:jcl-over-slf4j:${versions.slf4j}",
+        "log4j-over-slf4j"              : "org.slf4j:log4j-over-slf4j:${versions.slf4j}",
+        "slf4j-api"                     : "org.slf4j:slf4j-api:${versions.slf4j}",
+
+        // Spring
+        "spring-boot-starter-web"       : "org.springframework.boot:spring-boot-starter-web:${versions.springBoot}",
+        "spring-boot-starter-undertow"  : "org.springframework.boot:spring-boot-starter-undertow:${versions.springBoot}",
+        "spring-boot-starter-thymeleaf" : "org.springframework.boot:spring-boot-starter-thymeleaf:${versions.springBoot}",
+        "spring-boot-starter-websocket" : "org.springframework.boot:spring-boot-starter-websocket:${versions.springBoot}",
+        "spring-boot-starter-data-rest" : "org.springframework.boot:spring-boot-starter-data-rest:${versions.springBoot}",
+        "spring-boot-starter-data-jpa"  : "org.springframework.boot:spring-boot-starter-data-jpa:${versions.springBoot}",
+        "spring-boot-starter-data-redis": "org.springframework.boot:spring-boot-starter-data-redis:${versions.springBoot}",
+        "spring-boot-devtools"          : "org.springframework.boot:spring-boot-devtools:${versions.springBoot}",
+        "spring-boot-starter-test"      : "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}",
+        "spring-webmvc"                 : "org.springframework:spring-webmvc:4.3.12.RELEASE",
+
+        // JSON
+        "gson"                          : "com.google.code.gson:gson:2.8.2",
+        "json-lib"                      : "net.sf.json-lib:json-lib:2.4",
+        "jackson-databind"              : "com.fasterxml.jackson.core:jackson-databind:2.9.2",
+        "jackson-core"                  : "com.fasterxml.jackson.core:jackson-core:2.9.2",
+        "ezmorph"                       : "net.sf.ezmorph:ezmorph:1.0.6",
+
+        // Date
+        "joda-time"                     : "joda-time:joda-time:2.9.9",
+        "prettytime"                    : "org.ocpsoft.prettytime:prettytime:4.0.1.Final",
+
+        // Apache
+        "commons-lang3"                 : "org.apache.commons:commons-lang3:3.7",
+        "commons-lang"                  : "commons-lang:commons-lang:2.6",
+        "commons-beanutils"             : "commons-beanutils:commons-beanutils:1.9.3",
+        "httpmime"                      : "org.apache.httpcomponents:httpmime:4.5.3",
+
+        // lombok
+        "lombok"                        : "org.projectlombok:lombok:1.16.18",
+
+        // Test
+        "junit"                         : "junit:junit:4.12",
+        "assertj"                       : "org.assertj:assertj-core:3.8.0",
+        "mockito-core"                  : "org.mockito:mockito-core:2.12.0",
+        "h2"                            : "com.h2database:h2:1.4.196",
+
+        // springfox-swagger2
+        "springfox-swagger2"            : "io.springfox:springfox-swagger2:2.7.0",
+        "springfox-swagger-ui"          : "io.springfox:springfox-swagger-ui:2.7.0",
+        "springfox-bean-validators"     : "io.springfox:springfox-bean-validators:2.7.0",
+        "swagger2markup"                : "io.github.swagger2markup:swagger2markup:1.3.1",
+        "spring-restdocs-mockmvc"       : "org.springframework.restdocs:spring-restdocs-mockmvc:1.2.2.RELEASE",
+
+        // 私有 jar
+        "libphonenumber"                : "com.googlecode.libphonenumber:libphonenumber:8.8.5",
+        "hibernate-validator"           : "org.hibernate:hibernate-validator:6.0.4.Final",
+
+        // 七牛
+        "qiniu-java-sdk"                : "com.qiniu:qiniu-java-sdk:7.1.+",
+
+        // Others
+        "reflections"                   : "org.reflections:reflections:0.9.11",
+        "yunpian-java-sdk"              : "com.yunpian.sdk:yunpian-java-sdk:1.2.5",
+        "zxing-core"                    : "com.google.zxing:core:3.3.0",
+
+]
+

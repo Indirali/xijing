@@ -1,0 +1,23 @@
+group 'com.showtime'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+dependencies {
+
+    compile libraries.'spring-boot-starter-data-jpa'
+    compile libraries.'commons-lang3'
+    compile libraries.'prettytime'                      // 2015 年后基本无大更新 请切换到 joda-time
+    compile libraries.'reflections'
+    compile libraries.'jackson-databind'
+    compile libraries.'jackson-core'
+    compile libraries.'libphonenumber'
+    compile libraries.'spring-boot-starter-undertow'
+    compile libraries.'lombok'
+    compile libraries.'spring-webmvc'
+    compile libraries.'commons-lang'
+}
+
+// 此模块不需要 Spring Boot 插件支持
+bootRepackage {
+    enabled = false
+}
