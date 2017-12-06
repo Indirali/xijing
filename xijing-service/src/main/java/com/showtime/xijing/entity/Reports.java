@@ -3,6 +3,7 @@ package com.showtime.xijing.entity;
 import com.showtime.xijing.common.entity.BaseEntity;
 import com.showtime.xijing.enums.ReportType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -16,6 +17,7 @@ import java.util.Date;
  **/
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = false)
 public class Reports extends BaseEntity<Long> {
 
     @ManyToOne

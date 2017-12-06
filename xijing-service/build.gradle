@@ -14,7 +14,6 @@ dependencies {
     compile libraries.'druid'
     compile libraries.'hibernate-validator'
     compile libraries.'validation-api'
-    compile libraries.'json-lib'
     compile libraries.'ezmorph'
     compile libraries.'httpmime'
     compile libraries.'commons-beanutils'

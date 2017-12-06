@@ -2,6 +2,7 @@ package com.showtime.xijing.entity;
 
 import com.showtime.xijing.common.entity.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 
@@ -13,15 +14,16 @@ import javax.persistence.Entity;
  **/
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = false)
 public class User extends BaseEntity<Long> {
 
     private String openId;
 
-    private int place;
+    private String place;
 
     private String nickname;
 
-    private UserFile headPortrait;
+    private String headPortrait;
 
     private int sex;
 

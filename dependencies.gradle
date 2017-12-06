@@ -45,7 +45,6 @@ ext.libraries = [
 
         // JSON
         "gson"                          : "com.google.code.gson:gson:2.8.2",
-        "json-lib"                      : "net.sf.json-lib:json-lib:2.4",
         "jackson-databind"              : "com.fasterxml.jackson.core:jackson-databind:2.9.2",
         "jackson-core"                  : "com.fasterxml.jackson.core:jackson-core:2.9.2",
         "ezmorph"                       : "net.sf.ezmorph:ezmorph:1.0.6",
@@ -87,6 +86,7 @@ ext.libraries = [
         "reflections"                   : "org.reflections:reflections:0.9.11",
         "yunpian-java-sdk"              : "com.yunpian.sdk:yunpian-java-sdk:1.2.5",
         "zxing-core"                    : "com.google.zxing:core:3.3.0",
+        "bcprov-jdk15"                  : "org.bouncycastle:bcprov-jdk15:1.45",
 
 ]
 

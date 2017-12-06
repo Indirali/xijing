@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * Create with IntelliJ IDEA
  * User: Indira
@@ -29,6 +31,15 @@ public class UserService {
 
     public Page<User> findAll(Pageable pageable) {
         return userRepository.findAll(pageable);
+    }
+
+    public User save(User user) {
+        if (user.getId() != null) {
+            user.setUpdateTime(new Date());
+        } else {
+            user.setCreateTime(new Date());
+        }
+        return userRepository.save(user);
     }
 
 }
