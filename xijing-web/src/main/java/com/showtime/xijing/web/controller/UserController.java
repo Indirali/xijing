@@ -82,9 +82,15 @@ public class UserController {
                         User base = new User();
                         base.setNickname(userInfo.getAsJsonObject().get("nickName").getAsString());
                         base.setSex(userInfo.getAsJsonObject().get("gender").getAsInt());
-                        base.setPlace(userInfo.getAsJsonObject().get("city").getAsString());
+                        String place = null;
+                        if (userInfo.getAsJsonObject().get("country") != null)
+                            place += userInfo.getAsJsonObject().get("country").getAsString() + "-";
+                        if (userInfo.getAsJsonObject().get("province") != null)
+                            place += userInfo.getAsJsonObject().get("province").getAsString() + "-";
+                        if (userInfo.getAsJsonObject().get("city") != null)
+                            place += userInfo.getAsJsonObject().get("city").getAsString();
+                        base.setPlace(place);
                         base.setHeadPortrait(userInfo.getAsJsonObject().get("avatarUrl").getAsString());
-                        // base.setPhoneNumber(userInfo.getAsJsonObject().get("purePhoneNumber").getAsString());
                         base.setOpenId(openid);
                         user = userService.save(base);
                     }
