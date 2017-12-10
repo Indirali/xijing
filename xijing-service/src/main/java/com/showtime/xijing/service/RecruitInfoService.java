@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Create with IntelliJ IDEA
@@ -14,13 +15,17 @@ import java.util.Date;
  * Time: 12:38
  **/
 @Service
-public class RecruitInFoService {
+public class RecruitInfoService {
 
     private RecruitInfoRepository recruitInfoRepository;
 
     @Autowired
-    public RecruitInFoService(RecruitInfoRepository recruitInfoRepository) {
+    public RecruitInfoService(RecruitInfoRepository recruitInfoRepository) {
         this.recruitInfoRepository = recruitInfoRepository;
+    }
+
+    public List<RecruitInfo> findByRecruitId(long recruitId) {
+        return recruitInfoRepository.findByRecruitId(recruitId);
     }
 
     public RecruitInfo save(RecruitInfo recruitInfo) {

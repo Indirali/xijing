@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
+ * 报名表
  * Create with IntelliJ IDEA
  * User: Indira
  * Date: 2017/12/4

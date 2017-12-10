@@ -4,6 +4,8 @@ import com.showtime.xijing.entity.RecruitInfo;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Create with IntelliJ IDEA
  * User: Indira
@@ -12,4 +14,7 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface RecruitInfoRepository extends PagingAndSortingRepository<RecruitInfo, Long> {
+
+    List<RecruitInfo> findByRecruitId(long recruitId);
+
 }

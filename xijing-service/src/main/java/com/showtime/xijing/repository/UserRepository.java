@@ -1,6 +1,8 @@
 package com.showtime.xijing.repository;
 
 import com.showtime.xijing.entity.User;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.Entity;
 
 /**
+ * 用户文件表
  * Create with IntelliJ IDEA
  * User: Indira
  * Date: 2017/12/4

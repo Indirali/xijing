@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 /**
+ * 用户表
  * Create with IntelliJ IDEA
  * User: Indira
  * Date: 2017/12/4

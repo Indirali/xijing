@@ -23,6 +23,11 @@ public class RecruitService {
         this.recruitRepository = recruitRepository;
     }
 
+    public Recruit findById(long id) {
+        return recruitRepository.findbyId(id);
+    }
+
+
     public Recruit save(Recruit recruit) {
         if (recruit.getId() != null) {
             recruit.setUpdateTime(new Date());

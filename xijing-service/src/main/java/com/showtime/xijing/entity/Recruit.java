@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 /**
+ * 招聘表
  * Create with IntelliJ IDEA
  * User: Indira
  * Date: 2017/12/4

@@ -12,4 +12,7 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface RecruitRepository extends PagingAndSortingRepository<Recruit, Long> {
+
+    Recruit findbyId(Long id);
+
 }
