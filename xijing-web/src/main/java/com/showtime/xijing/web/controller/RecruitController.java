@@ -1,10 +1,10 @@
 package com.showtime.xijing.web.controller;
 
 import com.showtime.xijing.common.Result;
-import com.showtime.xijing.entity.Recruit;
 import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.service.RecruitInfoService;
 import com.showtime.xijing.service.RecruitService;
+import com.showtime.xijing.service.ValidateService;
 import com.showtime.xijing.web.vo.RecruitVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +23,28 @@ import javax.validation.Valid;
 public class RecruitController {
 
     private RecruitService recruitService;
+    private ValidateService validateService;
     private RecruitInfoService recruitInfoService;
 
     @Autowired
     public RecruitController(RecruitService recruitService,
+                             ValidateService validateService,
                              RecruitInfoService recruitInfoService) {
         this.recruitService = recruitService;
+        this.validateService = validateService;
         this.recruitInfoService = recruitInfoService;
     }
 
     /**
-     * 新增/修改一个招聘信息
+     * 新增/修改招聘信息
      *
      * @param recruitVo
      * @return
      */
     @RequestMapping(value = "/save", method = RequestMethod.GET)
-    public Result saveRecruit(@Valid RecruitVo recruitVo) {
+    public Result saveRecruit(RecruitVo recruitVo) {
+        validateService.validateObject(recruitVo.getRecruit());
+        validateService.validateObjectList(recruitVo.getRecruitInfos());
         recruitService.save(recruitVo.getRecruit());
         for (RecruitInfo recruitInfo : recruitVo.getRecruitInfos()) {
             recruitInfoService.save(recruitInfo);

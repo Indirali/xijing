@@ -24,7 +24,7 @@ public class RecruitService {
     }
 
     public Recruit findById(long id) {
-        return recruitRepository.findbyId(id);
+        return recruitRepository.findOne(id);
     }
 
 
@@ -36,4 +36,5 @@ public class RecruitService {
         }
         return recruitRepository.save(recruit);
     }
+
 }

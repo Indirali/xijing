@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * 用户表
@@ -51,5 +52,7 @@ public class User extends BaseEntity<Long> {
     private int creditDegree;
 
     private int status;
+
+    private Date lastLoginTime;
 
 }

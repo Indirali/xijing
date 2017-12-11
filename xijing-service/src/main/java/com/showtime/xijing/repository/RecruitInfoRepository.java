@@ -15,6 +15,6 @@ import java.util.List;
 @Repository
 public interface RecruitInfoRepository extends PagingAndSortingRepository<RecruitInfo, Long> {
 
-    List<RecruitInfo> findByRecruitId(long recruitId);
+    List<RecruitInfo> findByRecruit(long recruitId);
 
 }

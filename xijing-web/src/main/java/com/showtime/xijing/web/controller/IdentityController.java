@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
+
 /**
  * Created by li on 2017/12/9.
  */
@@ -60,7 +62,11 @@ public class IdentityController {
                     base.setSex(userInfo.getAsJsonObject().get("gender").getAsInt());
                     base.setHeadPortrait(userInfo.getAsJsonObject().get("avatarUrl").getAsString());
                     base.setOpenId(openid);
+                    base.setLastLoginTime(new Date());
                     user = userService.save(base);
+                } else {
+                    user.setLastLoginTime(new Date());
+                    userService.save(user);
                 }
             }
         } catch (Exception e) {

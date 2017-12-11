@@ -1,7 +1,5 @@
-package com.showtime.xijing.web.utils;
+package com.showtime.xijing.common.entity;
 
-import com.showtime.xijing.common.entity.MobilePhoneNumber;
-import com.showtime.xijing.common.entity.PhoneNumber;
 import org.springframework.util.Assert;
 
 /**

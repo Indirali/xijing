@@ -25,7 +25,7 @@ public class RecruitInfoService {
     }
 
     public List<RecruitInfo> findByRecruitId(long recruitId) {
-        return recruitInfoRepository.findByRecruitId(recruitId);
+        return recruitInfoRepository.findByRecruit(recruitId);
     }
 
     public RecruitInfo save(RecruitInfo recruitInfo) {
@@ -35,5 +35,9 @@ public class RecruitInfoService {
             recruitInfo.setCreateTime(new Date());
         }
         return recruitInfoRepository.save(recruitInfo);
+    }
+
+    public void delete(long recruitInfoId) {
+        recruitInfoRepository.delete(recruitInfoId);
     }
 }
