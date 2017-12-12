@@ -28,4 +28,6 @@ public class RecruitInfo extends BaseEntity<Long> {
 
     private String remarks;
 
+    private int reportCount;
+
 }

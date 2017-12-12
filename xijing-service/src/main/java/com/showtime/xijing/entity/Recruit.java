@@ -2,11 +2,14 @@ package com.showtime.xijing.entity;
 
 import com.showtime.xijing.common.entity.BaseEntity;
 import com.showtime.xijing.enums.RecruitType;
+import com.showtime.xijing.enums.SuperStarType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import java.awt.*;
+import java.util.Date;
 
 /**
  * 招聘表
@@ -27,13 +30,16 @@ public class Recruit extends BaseEntity<Long> {
     @ManyToOne
     private User user;
 
+    private Point point;
+
+    private SuperStarType superStar;
+
     private String fileIds;
 
     private String remarks;
 
     private int status;
 
-    // private List<UserFile> files;
+    private Date participationTime;
 
-    // private List<RecruitInfo> recruitInfos;
 }

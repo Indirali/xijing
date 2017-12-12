@@ -2,6 +2,7 @@ package com.showtime.xijing.service;
 
 import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.repository.RecruitInfoRepository;
+import com.showtime.xijing.repository.ReportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +18,20 @@ import java.util.List;
 @Service
 public class RecruitInfoService {
 
+    private ReportsRepository reportsRepository;
     private RecruitInfoRepository recruitInfoRepository;
 
     @Autowired
-    public RecruitInfoService(RecruitInfoRepository recruitInfoRepository) {
+    public RecruitInfoService(ReportsRepository reportsRepository,
+                              RecruitInfoRepository recruitInfoRepository) {
+        this.reportsRepository = reportsRepository;
         this.recruitInfoRepository = recruitInfoRepository;
     }
 
     public List<RecruitInfo> findByRecruitId(long recruitId) {
-        return recruitInfoRepository.findByRecruit(recruitId);
+        List<RecruitInfo> recruitInfos = recruitInfoRepository.findByRecruit(recruitId);
+        recruitInfos.forEach(recruitInfo -> recruitInfo.setReportCount(reportsRepository.countByReportRecruitInfo(recruitInfo)));
+        return recruitInfos;
     }
 
     public RecruitInfo save(RecruitInfo recruitInfo) {

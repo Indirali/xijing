@@ -1,6 +1,7 @@
 package com.showtime.xijing.web.controller;
 
 import com.showtime.xijing.common.Result;
+import com.showtime.xijing.entity.RecruitCondition;
 import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.service.RecruitInfoService;
 import com.showtime.xijing.service.RecruitService;
@@ -8,11 +9,12 @@ import com.showtime.xijing.service.ValidateService;
 import com.showtime.xijing.web.vo.RecruitVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 /**
  * Created by li on 2017/12/9.
@@ -33,6 +35,12 @@ public class RecruitController {
         this.recruitService = recruitService;
         this.validateService = validateService;
         this.recruitInfoService = recruitInfoService;
+    }
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public Result findRecruitInfo(@PageableDefault(sort = {"create_time"}, direction = Sort.Direction.DESC) Pageable pageable,
+                                  RecruitCondition recruitCondition) {
+        return Result.success(recruitService.queryAll(recruitCondition, pageable));
     }
 
     /**
@@ -59,7 +67,7 @@ public class RecruitController {
      * @return
      */
     @RequestMapping(value = "/info", method = RequestMethod.GET)
-    public Result findRecruitInfo(@Valid long recruitId) {
+    public Result findRecruitInfo(long recruitId) {
         return Result.success().data("recruit", recruitService.findById(recruitId))
                 .data("recruitInfo", recruitInfoService.findByRecruitId(recruitId));
     }

@@ -32,6 +32,8 @@ public class Reports extends BaseEntity<Long> {
 
     private Recruit reportRecruit;
 
+    private RecruitInfo reportRecruitInfo;
+
     private Date reportTime;
 
     private int status;

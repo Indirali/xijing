@@ -1,5 +1,7 @@
 package com.showtime.xijing.repository;
 
+import com.showtime.xijing.entity.Recruit;
+import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.entity.Reports;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -12,4 +14,9 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface ReportsRepository extends PagingAndSortingRepository<Reports, Long> {
+
+    int countByReportRecruit(Recruit recruit);
+
+    int countByReportRecruitInfo(RecruitInfo recruitInfo);
+
 }

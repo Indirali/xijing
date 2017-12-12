@@ -1,17 +1,15 @@
 # 项目构建
 #### 第一阶段  
-JDK1.8 + Tomcat8 环境
-采用Spring+SpringMVC+Mybatis框架(已完成)  
+JDK1.8 环境
+采用SpringBoot框架(已完成)  
 数据库MySQL(已完成)  
 缓存Redis(已完成)  
-文件存储FTP(已完成,服务器未搭好暂不可用)  
+文件存储 七牛(已完成)  
 消息中间件RocketMQ [RocketMQ详情了解](http://jm.taobao.org/2017/01/12/rocketmq-quick-start-in-10-minutes/)(未完成,商议)    
 #### 第二阶段  
-支付方式(微信、支付宝)不支持银行卡 (未完成)  
-验证短信发送(云片) (未完成)  
+支付方式(微信)
+验证短信发送(云片) (已完成)  
 地图选点 (高德地图API) (未完成)  
-搜索服务Elasticsearch (未完成) 
-前台使用Vue2.0 (自适应页面app,不使用Android和ios客户端)  
 其他再定，项目框架先搭好(高扩展性、高实用性、低耦合性)  
 
 # 项目难点
