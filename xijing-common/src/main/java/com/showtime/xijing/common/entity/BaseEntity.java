@@ -3,6 +3,7 @@ package com.showtime.xijing.common.entity;
 import com.showtime.xijing.common.observerableEntity.ObservableEntity;
 import com.showtime.xijing.common.utils.PrettyTimeUtils;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 
 @MappedSuperclass
 @Data
+@EqualsAndHashCode(callSuper=false)
 @EntityListeners(BaseEntityListener.class)
 public abstract class BaseEntity<ID extends Serializable> extends ObservableEntity<ID> {
     static {

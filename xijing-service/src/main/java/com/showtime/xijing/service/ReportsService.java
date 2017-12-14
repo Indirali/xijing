@@ -27,8 +27,10 @@ public class ReportsService {
         if (reports.getId() != null) {
             reports.setUpdateTime(new Date());
         } else {
+            reports.setReportTime(new Date());
             reports.setCreateTime(new Date());
         }
         return reportsRepository.save(reports);
     }
+
 }

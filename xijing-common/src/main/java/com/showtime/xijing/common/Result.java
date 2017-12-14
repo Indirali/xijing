@@ -27,11 +27,11 @@ public class Result<T extends Object> {
     }
 
     public static Result<?> noAuth() {
-        return new Result<>(code_noAuth, null, "请登录后重试");
+        return new Result<>(code_noAuth, null, "请先进行实名认证!");
     }
 
     public static Result<?> noPermission() {
-        return new Result<>(code_noPermission, null, "请授权或登录其他账号");
+        return new Result<>(code_noPermission, null, "请授权或登录账号");
     }
 
     /**

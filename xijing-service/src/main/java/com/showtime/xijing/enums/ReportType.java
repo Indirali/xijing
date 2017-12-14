@@ -8,7 +8,7 @@ package com.showtime.xijing.enums;
  **/
 public enum ReportType {
 
-    Report_User,
-    Report_Recruit;
+    Person,
+    Organization;
 
 }

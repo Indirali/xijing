@@ -7,29 +7,22 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.Entity;
 
 /**
- * 招聘详情
  * Create with IntelliJ IDEA
  * User: Indira
- * Date: 2017/12/4
- * Time: 15:16
+ * Date: 2017/12/14
+ * Time: 15:29
  **/
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = false)
-public class RecruitInfo extends BaseEntity<Long> {
+public class UserInfo extends BaseEntity<Long> {
 
-    private Recruit recruit;
+    private Float chest;
 
-    private int sex;
+    private Float waist;
 
-    private int age;
+    private Float hipline;
 
-    private boolean organization;
-
-    private int amount;
-
-    private String remarks;
-
-    private int reportCount;
+    private Float shoeSize;
 
 }

@@ -5,8 +5,7 @@ import com.showtime.xijing.convert.EmojiConverter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Convert;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -40,8 +39,16 @@ public class User extends BaseEntity<Long> {
 
     private String introduction;
 
+    @OneToOne
+    @JoinColumn(name = "user_info_id", referencedColumnName = "id", unique = true)
+    private UserInfo userInfo;
+
     @NotNull(message = "角色不能为空.")
     private int role;
+
+    private String idCard;
+
+    private int authStatus;
 
     private UserFile wxImage;
 

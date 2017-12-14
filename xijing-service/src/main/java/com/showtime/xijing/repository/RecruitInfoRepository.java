@@ -17,4 +17,6 @@ public interface RecruitInfoRepository extends PagingAndSortingRepository<Recrui
 
     List<RecruitInfo> findByRecruit(long recruitId);
 
+    int countByRecruit(long recruitId);
+
 }

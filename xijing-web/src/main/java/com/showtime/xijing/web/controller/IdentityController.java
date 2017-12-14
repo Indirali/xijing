@@ -52,6 +52,7 @@ public class IdentityController {
         String openid = json.getAsJsonObject().get("openid").getAsString();
         User user = userService.findByOpenId(openid);
         String session_key = json.getAsJsonObject().get("session_key").getAsString();
+        boolean newUser = false;
         try {
             String result = AesCbcUtil.decrypt(encryptedData, session_key, iv, "UTF-8");
             JsonElement userInfo = new JsonParser().parse(result);
@@ -64,6 +65,7 @@ public class IdentityController {
                     base.setOpenId(openid);
                     base.setLastLoginTime(new Date());
                     user = userService.save(base);
+                    newUser = true;
                 } else {
                     user.setLastLoginTime(new Date());
                     userService.save(user);
@@ -73,7 +75,7 @@ public class IdentityController {
             e.printStackTrace();
             return Result.fail("用户信息解析失败");
         }
-        return Result.success(user);
+        return Result.success().data("User", user).data("newUser", newUser);
     }
 
 }

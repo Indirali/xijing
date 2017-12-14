@@ -19,7 +19,6 @@ dependencies {
     compile libraries.'prettytime'                      // 2015 年后基本无大更新 请切换到 joda-time
     compile libraries.'reflections'
     compile libraries.'bcprov-jdk15'
-    compile libraries.'fastjson'
 
     testCompile libraries.'spring-boot-starter-test'
     testCompile libraries.'swagger2markup'

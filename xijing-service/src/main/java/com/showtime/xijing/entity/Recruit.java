@@ -42,4 +42,8 @@ public class Recruit extends BaseEntity<Long> {
 
     private Date participationTime;
 
+    private int count;
+
+    private int reportCount;
+
 }

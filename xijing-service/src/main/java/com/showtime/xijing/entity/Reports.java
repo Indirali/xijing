@@ -28,8 +28,6 @@ public class Reports extends BaseEntity<Long> {
 
     private String content;
 
-    private User reportUser;
-
     private Recruit reportRecruit;
 
     private RecruitInfo reportRecruitInfo;
