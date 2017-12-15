@@ -7,6 +7,7 @@ package com.showtime.xijing.web.utils;
  * Time: 14:14
  **/
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -27,6 +28,7 @@ import java.security.spec.InvalidParameterSpecException;
  * AES-128-CBC可以自己定义“密钥”和“偏移量“。
  * AES-128是jdk自动生成的“密钥”。
  */
+@Slf4j
 public class AesCbcUtil {
 
 
@@ -72,21 +74,8 @@ public class AesCbcUtil {
                 return result;
             }
             return null;
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidParameterSpecException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (InvalidAlgorithmParameterException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidAlgorithmParameterException | InvalidKeyException | InvalidParameterSpecException | NoSuchPaddingException | UnsupportedEncodingException e) {
+            log.debug(e.toString());
             e.printStackTrace();
         }
 

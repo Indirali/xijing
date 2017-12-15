@@ -9,8 +9,8 @@ import java.util.Map;
  */
 public class Result<T extends Object> {
 
-    public static Code code_success = new Code(200);
-    public static Code code_fail = new Code(400);
+    private static Code code_success = new Code(200);
+    private static Code code_fail = new Code(400);
     private static Code code_noAuth = new Code(401);
     private static Code code_noPermission = new Code(402);
 

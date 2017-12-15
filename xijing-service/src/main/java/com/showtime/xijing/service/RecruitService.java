@@ -2,7 +2,6 @@ package com.showtime.xijing.service;
 
 import com.showtime.xijing.entity.Recruit;
 import com.showtime.xijing.entity.RecruitCondition;
-import com.showtime.xijing.repository.RecruitInfoRepository;
 import com.showtime.xijing.repository.RecruitRepository;
 import com.showtime.xijing.repository.ReportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +28,12 @@ public class RecruitService {
 
     private ReportsRepository reportsRepository;
     private RecruitRepository recruitRepository;
-    private RecruitInfoRepository recruitInfoRepository;
 
     @Autowired
     public RecruitService(ReportsRepository reportsRepository,
-                          RecruitRepository recruitRepository,
-                          RecruitInfoRepository recruitInfoRepository) {
+                          RecruitRepository recruitRepository) {
         this.reportsRepository = reportsRepository;
         this.recruitRepository = recruitRepository;
-        this.recruitInfoRepository = recruitInfoRepository;
     }
 
     public Page<Recruit> queryAll(RecruitCondition recruitCondition, Pageable pageable) {

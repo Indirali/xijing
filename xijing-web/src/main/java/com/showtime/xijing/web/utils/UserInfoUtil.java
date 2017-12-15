@@ -1,5 +1,6 @@
 package com.showtime.xijing.web.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -14,6 +15,7 @@ import java.io.IOException;
  * Date: 2017/12/4
  * Time: 18:16
  **/
+@Slf4j
 public class UserInfoUtil {
 
     private static final String appId = "wx4245c40948b87448";
@@ -60,6 +62,7 @@ public class UserInfoUtil {
             HttpEntity entity = response.getEntity();
             rec = EntityUtils.toString(entity);
         } catch (IOException e) {
+            log.debug(e.toString());
             e.printStackTrace();
         }
         return rec;

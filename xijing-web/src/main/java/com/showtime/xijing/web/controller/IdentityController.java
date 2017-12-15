@@ -42,7 +42,7 @@ public class IdentityController {
                         @RequestParam(name = "iv") String iv,
                         @RequestParam(name = "code") String code) {
         log.info("用户进入");
-        Assert.isTrue(code != null || code.length() != 0, "code 不能为空");
+        Assert.notNull(code, "code 不能为空");
         log.info("微信小程序登录，请求数据为[ code:" + code + "]");
         String token = UserInfoUtil.getWebAccess(code);  // 获取用户openid的实际网址
         String rec = UserInfoUtil.httpGet(token);  // 通过HttpGet方法将token发送至微信服务器并获得其回执
@@ -72,6 +72,7 @@ public class IdentityController {
                 }
             }
         } catch (Exception e) {
+            log.debug(e.toString());
             e.printStackTrace();
             return Result.fail("用户信息解析失败");
         }

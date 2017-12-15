@@ -1,5 +1,6 @@
 package com.showtime.xijing.common.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 
 import java.text.ParseException;
@@ -15,19 +16,20 @@ import java.util.Map;
  * @author June
  * @version 1.0, 2010-06-17
  */
+@Slf4j
 public class IdCardUtils extends StringUtils {
     /**
      * 中国公民身份证号码最小长度。
      */
-    public static final int CHINA_ID_MIN_LENGTH = 15;
+    private static final int CHINA_ID_MIN_LENGTH = 15;
     /**
      * 中国公民身份证号码最大长度。
      */
-    public static final int CHINA_ID_MAX_LENGTH = 18;
+    private static final int CHINA_ID_MAX_LENGTH = 18;
     /**
      * 省、直辖市代码表
      */
-    public static final String cityCode[] = {
+    private static final String cityCode[] = {
             "11", "12", "13", "14", "15", "21", "22", "23", "31", "32", "33", "34", "35", "36", "37", "41",
             "42", "43", "44", "45", "46", "50", "51", "52", "53", "54", "61", "62", "63", "64", "65", "71",
             "81", "82", "91"
@@ -35,28 +37,28 @@ public class IdCardUtils extends StringUtils {
     /**
      * 每位加权因子
      */
-    public static final int power[] = {
+    private static final int power[] = {
             7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2
     };
     /**
      * 第18位校检码
      */
-    public static final String verifyCode[] = {
+    private static final String verifyCode[] = {
             "1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"
     };
     /**
      * 最低年限
      */
-    public static final int MIN = 1930;
-    public static Map<String, String> cityCodes = new HashMap<>();
+    private static final int MIN = 1930;
+    private static Map<String, String> cityCodes = new HashMap<>();
     /**
      * 台湾身份首字母对应数字
      */
-    public static Map<String, Integer> twFirstCode = new HashMap<>();
+    private static Map<String, Integer> twFirstCode = new HashMap<>();
     /**
      * 香港身份首字母对应数字
      */
-    public static Map<String, Integer> hkFirstCode = new HashMap<>();
+    private static Map<String, Integer> hkFirstCode = new HashMap<>();
 
     static {
         cityCodes.put("11", "北京");
@@ -150,6 +152,7 @@ public class IdCardUtils extends StringUtils {
             try {
                 birthDate = new SimpleDateFormat("yyMMdd").parse(birthday);
             } catch (ParseException e) {
+                log.debug(e.toString());
                 e.printStackTrace();
             }
             Calendar cal = Calendar.getInstance();
@@ -248,6 +251,7 @@ public class IdCardUtils extends StringUtils {
             try {
                 birthDate = new SimpleDateFormat("yy").parse(birthCode.substring(0, 2));
             } catch (ParseException e) {
+                log.debug(e.toString());
                 e.printStackTrace();
             }
             Calendar cal = Calendar.getInstance();
@@ -299,7 +303,6 @@ public class IdCardUtils extends StringUtils {
         } else if (idCard.matches("^[1|5|7][0-9]{6}\\(?[0-9A-Z]\\)?$")) { // 澳门
             info[0] = "澳门";
             info[1] = "N";
-            // TODO
         } else if (idCard.matches("^[A-Z]{1,2}[0-9]{6}\\(?[0-9A]\\)?$")) { // 香港
             info[0] = "香港";
             info[1] = "N";
@@ -384,6 +387,7 @@ public class IdCardUtils extends StringUtils {
                 iArr[i] = Integer.parseInt(String.valueOf(ca[i]));
             }
         } catch (NumberFormatException e) {
+            log.debug(e.toString());
             e.printStackTrace();
         }
         return iArr;
@@ -451,6 +455,8 @@ public class IdCardUtils extends StringUtils {
             case 0:
                 sCode = "1";
                 break;
+            default:
+                sCode = "2";
         }
         return sCode;
     }

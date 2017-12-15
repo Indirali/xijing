@@ -1,5 +1,6 @@
 package com.showtime.xijing.service;
 
+import com.showtime.xijing.entity.UserInfo;
 import com.showtime.xijing.repository.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,10 @@ public class UserInfoService {
     @Autowired
     public UserInfoService(UserInfoRepository userInfoRepository) {
         this.userInfoRepository = userInfoRepository;
+    }
+
+    public UserInfo save(UserInfo userInfo) {
+        return userInfoRepository.save(userInfo);
     }
 
 }

@@ -4,6 +4,7 @@ package com.showtime.xijing.service;
 import com.showtime.xijing.common.entity.MobilePhoneNumber;
 import com.showtime.xijing.enums.VerifyCodeType;
 import com.yunpian.sdk.YunpianException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Service
 public class VerifyCodeService {
 
@@ -39,8 +41,10 @@ public class VerifyCodeService {
         try {
             smsVerifyCodeService.sendSms(phoneNumber, code);
         } catch (IOException e) {
+            log.debug(e.toString());
             e.printStackTrace();
         } catch (YunpianException e) {
+            log.debug(e.toString());
             Assert.isNull(e, e.getMessage());
         }
     }
