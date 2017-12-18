@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import java.util.Date;
 
@@ -24,6 +26,7 @@ public class Reports extends BaseEntity<Long> {
     @ManyToOne
     private User user;
 
+    @Enumerated(EnumType.STRING)
     private ReportType reportType;
 
     private String content;

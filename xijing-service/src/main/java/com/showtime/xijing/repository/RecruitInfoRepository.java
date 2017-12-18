@@ -1,5 +1,6 @@
 package com.showtime.xijing.repository;
 
+import com.showtime.xijing.entity.Recruit;
 import com.showtime.xijing.entity.RecruitInfo;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ import java.util.List;
 @Repository
 public interface RecruitInfoRepository extends PagingAndSortingRepository<RecruitInfo, Long> {
 
-    List<RecruitInfo> findByRecruit(long recruitId);
+    List<RecruitInfo> findByRecruit(Recruit recruit);
 
     int countByRecruit(long recruitId);
 
