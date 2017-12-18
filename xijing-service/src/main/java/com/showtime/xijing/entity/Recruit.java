@@ -6,8 +6,7 @@ import com.showtime.xijing.enums.SuperStarType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.awt.*;
 import java.util.Date;
 
@@ -25,6 +24,7 @@ public class Recruit extends BaseEntity<Long> {
 
     private String title;
 
+    @Enumerated(EnumType.STRING)
     private RecruitType type;
 
     @ManyToOne
@@ -32,6 +32,7 @@ public class Recruit extends BaseEntity<Long> {
 
     private Point point;
 
+    @Enumerated(EnumType.STRING)
     private SuperStarType superStar;
 
     private String fileIds;
@@ -42,8 +43,10 @@ public class Recruit extends BaseEntity<Long> {
 
     private Date participationTime;
 
+    @Transient
     private int count;
 
+    @Transient
     private int reportCount;
 
 }

@@ -93,7 +93,7 @@ public class UserController {
      * @param verifyCodeType
      * @return
      */
-    @RequestMapping(value = "/verifyCode", method = RequestMethod.POST)
+    @RequestMapping(value = "/verifyCode", method = RequestMethod.GET)
     public Result verify(String phoneNumber, String openId, VerifyCodeType verifyCodeType) {
         User user = userService.findByOpenId(openId);
         Assert.notNull(user, "用户不存在!");
@@ -109,7 +109,7 @@ public class UserController {
      * @param openId
      * @return
      */
-    @RequestMapping(value = "/auth", method = RequestMethod.POST)
+    @RequestMapping(value = "/auth", method = RequestMethod.GET)
     public Result auth(String idCard, String openId) {
         User user = userService.findByOpenId(openId);
         Assert.notNull(user, "用户不存在!");

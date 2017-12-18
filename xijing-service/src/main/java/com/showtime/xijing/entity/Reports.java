@@ -28,8 +28,10 @@ public class Reports extends BaseEntity<Long> {
 
     private String content;
 
+    @ManyToOne
     private Recruit reportRecruit;
 
+    @ManyToOne
     private RecruitInfo reportRecruitInfo;
 
     private Date reportTime;

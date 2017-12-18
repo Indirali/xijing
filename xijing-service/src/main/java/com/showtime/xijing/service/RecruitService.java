@@ -5,14 +5,9 @@ import com.showtime.xijing.entity.RecruitCondition;
 import com.showtime.xijing.repository.RecruitRepository;
 import com.showtime.xijing.repository.ReportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,8 +31,8 @@ public class RecruitService {
         this.recruitRepository = recruitRepository;
     }
 
-    public Page<Recruit> queryAll(RecruitCondition recruitCondition, Pageable pageable) {
-        Page<Recruit> recruits = recruitRepository.findAll((Root<Recruit> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) -> {
+    public List<Recruit> queryAll(RecruitCondition recruitCondition) {
+        List<Recruit> recruits = recruitRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
             if (recruitCondition.getRecruitType() != null)
                 predicates.add(criteriaBuilder.equal(root.get("type"), recruitCondition.getRecruitType()));
@@ -48,7 +43,7 @@ public class RecruitService {
             if (recruitCondition.getEndTime() != null)
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("participation_time"), recruitCondition.getEndTime()));
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
-        }, pageable);
+        });
         for (Recruit recruit : recruits)
             recruit.setReportCount(reportsRepository.countByReportRecruit(recruit));
         return recruits;

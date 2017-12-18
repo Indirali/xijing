@@ -8,9 +8,9 @@ package com.showtime.xijing.enums;
  **/
 public enum SuperStarType {
 
-    Null,
-    Hot_Star,
-    Lister_Star,
-    Ordinary_Star;
+    Null,  // 无
+    Hot_Star,  // 当红明星
+    Lister_Star,  //  一线明星
+    Ordinary_Star; // 普通明星
 
 }

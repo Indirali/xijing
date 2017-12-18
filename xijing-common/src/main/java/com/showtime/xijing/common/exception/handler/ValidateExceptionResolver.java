@@ -1,8 +1,7 @@
 package com.showtime.xijing.common.exception.handler;
 
 import com.showtime.xijing.common.Result;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindException;
@@ -18,11 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@Slf4j
 @Component
 public class ValidateExceptionResolver implements HandlerExceptionResolver {
-
-    private final static Logger logger = LoggerFactory.getLogger(ValidateExceptionResolver.class);
 
     @Override
     public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
@@ -38,9 +35,7 @@ public class ValidateExceptionResolver implements HandlerExceptionResolver {
                 msg = error.getDefaultMessage();
                 map.put("filed", ((FieldError) error).getField());
             }
-
             map.put("code", Result.code_fail.getValue());
-
             map.put("message", msg);
             return new ModelAndView(new MappingJackson2JsonView(), map);
         }

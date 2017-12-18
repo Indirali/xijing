@@ -141,7 +141,7 @@ public class IdCardUtils extends StringUtils {
      * @return 18位身份编码
      */
     public static String conver15CardTo18(String idCard) {
-        String idCard18 = "";
+        String idCard18;
         if (idCard.length() != CHINA_ID_MIN_LENGTH) {
             return null;
         }
@@ -153,7 +153,6 @@ public class IdCardUtils extends StringUtils {
                 birthDate = new SimpleDateFormat("yyMMdd").parse(birthday);
             } catch (ParseException e) {
                 log.debug(e.toString());
-                e.printStackTrace();
             }
             Calendar cal = Calendar.getInstance();
             if (birthDate != null)
@@ -252,7 +251,6 @@ public class IdCardUtils extends StringUtils {
                 birthDate = new SimpleDateFormat("yy").parse(birthCode.substring(0, 2));
             } catch (ParseException e) {
                 log.debug(e.toString());
-                e.printStackTrace();
             }
             Calendar cal = Calendar.getInstance();
             if (birthDate != null)
@@ -285,18 +283,14 @@ public class IdCardUtils extends StringUtils {
         }
         if (idCard.matches("^[a-zA-Z][0-9]{9}$")) { // 台湾
             info[0] = "台湾";
-            System.out.println("11111");
             String char2 = idCard.substring(1, 2);
             if (char2.equals("1")) {
                 info[1] = "M";
-                System.out.println("MMMMMMM");
             } else if (char2.equals("2")) {
                 info[1] = "F";
-                System.out.println("FFFFFFF");
             } else {
                 info[1] = "N";
                 info[2] = "false";
-                System.out.println("NNNN");
                 return info;
             }
             info[2] = validateTWCard(idCard) ? "true" : "false";
@@ -388,7 +382,6 @@ public class IdCardUtils extends StringUtils {
             }
         } catch (NumberFormatException e) {
             log.debug(e.toString());
-            e.printStackTrace();
         }
         return iArr;
     }
@@ -420,7 +413,7 @@ public class IdCardUtils extends StringUtils {
      * @return 校验位
      */
     public static String getCheckCode18(int iSum) {
-        String sCode = "";
+        String sCode;
         switch (iSum % 11) {
             case 10:
                 sCode = "2";
@@ -468,7 +461,7 @@ public class IdCardUtils extends StringUtils {
      * @return 年龄
      */
     public static int getAgeByIdCard(String idCard) {
-        int iAge = 0;
+        int iAge;
         if (idCard.length() == CHINA_ID_MIN_LENGTH) {
             idCard = conver15CardTo18(idCard);
         }
@@ -571,7 +564,7 @@ public class IdCardUtils extends StringUtils {
      */
     public static String getProvinceByIdCard(String idCard) {
         int len = idCard.length();
-        String sProvince = null;
+        String sProvince;
         String sProvinNum = "";
         if (len == CHINA_ID_MIN_LENGTH || len == CHINA_ID_MAX_LENGTH) {
             sProvinNum = idCard.substring(0, 2);

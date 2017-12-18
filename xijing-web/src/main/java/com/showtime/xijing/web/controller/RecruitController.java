@@ -12,8 +12,6 @@ import com.showtime.xijing.web.vo.RecruitVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,9 +42,9 @@ public class RecruitController {
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public Result findRecruitInfo(@PageableDefault(sort = {"create_time"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public Result findRecruitInfo(Pageable pageable,
                                   RecruitCondition recruitCondition) {
-        return Result.success(recruitService.queryAll(recruitCondition, pageable));
+        return Result.success(recruitService.queryAll(recruitCondition));
     }
 
     /**

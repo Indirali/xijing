@@ -8,7 +8,8 @@ package com.showtime.xijing.enums;
  **/
 public enum RecruitType {
 
-    Extra,  // 临时演员
+    Activity, // 活动
+    Extra,  // 临时演员(群演)
     Contributing_Actor,  // 特约演员
     Model, // 模特
     Commercial_Performance, // 商演
