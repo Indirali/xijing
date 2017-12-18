@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 /**
  * 招聘详情
@@ -18,6 +20,7 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = false)
 public class RecruitInfo extends BaseEntity<Long> {
 
+    @NotNull(message = "招聘不能为空.")
     private Recruit recruit;
 
     private int sex;
@@ -30,6 +33,7 @@ public class RecruitInfo extends BaseEntity<Long> {
 
     private String remarks;
 
+    @Transient
     private int reportCount;
 
 }

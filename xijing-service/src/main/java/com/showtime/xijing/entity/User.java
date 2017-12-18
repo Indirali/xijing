@@ -40,7 +40,6 @@ public class User extends BaseEntity<Long> {
     private String introduction;
 
     @OneToOne
-    @JoinColumn(name = "user_info_id", referencedColumnName = "id", unique = true)
     private UserInfo userInfo;
 
     @NotNull(message = "角色不能为空.")

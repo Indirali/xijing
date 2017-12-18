@@ -44,7 +44,7 @@ public class RecruitController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public Result findRecruitInfo(Pageable pageable,
                                   RecruitCondition recruitCondition) {
-        return Result.success(recruitService.queryAll(recruitCondition));
+        return Result.success(recruitService.findAll(recruitCondition, pageable));
     }
 
     /**
