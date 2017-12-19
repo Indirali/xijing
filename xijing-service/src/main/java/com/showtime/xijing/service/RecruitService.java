@@ -46,6 +46,8 @@ public class RecruitService {
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("participation_time"), recruitCondition.getEndTime()));
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
         }, pageable);
+        for (Recruit recruit : recruits)
+            recruit.setReportCount(reportsRepository.countByReportRecruit(recruit));
         return recruits;
     }
 

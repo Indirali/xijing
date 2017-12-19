@@ -27,9 +27,16 @@ public class ReportsController {
         this.reportsService = reportsService;
     }
 
-    @RequestMapping(value = "/report", method = RequestMethod.GET)
+    @RequestMapping(value = "/report", method = RequestMethod.POST)
     public Result reportRecruit(Reports reports) {
         reportsService.save(reports);
+        return Result.success();
+    }
+
+    @RequestMapping(value = "/cancel", method = RequestMethod.GET)
+    public Result cancelReport(long reportId) {
+        Reports reports = reportsService.findById(reportId);
+        reports.setStatus(1);
         return Result.success();
     }
 

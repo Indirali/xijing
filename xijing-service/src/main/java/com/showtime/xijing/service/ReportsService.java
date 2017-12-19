@@ -33,4 +33,8 @@ public class ReportsService {
         return reportsRepository.save(reports);
     }
 
+    public Reports findById(long id) {
+        return reportsRepository.findOne(id);
+    }
+
 }

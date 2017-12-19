@@ -53,7 +53,7 @@ public class RecruitController {
      * @param recruitVo
      * @return
      */
-    @RequestMapping(value = "/save", method = RequestMethod.GET)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result saveRecruit(RecruitVo recruitVo, String openId) {
         User user = userService.findByOpenId(openId);
         Assert.notNull(user, "用户不存在！");
