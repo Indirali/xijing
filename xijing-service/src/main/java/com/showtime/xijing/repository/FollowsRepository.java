@@ -1,8 +1,11 @@
 package com.showtime.xijing.repository;
 
 import com.showtime.xijing.entity.Follows;
+import com.showtime.xijing.entity.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Create with IntelliJ IDEA
@@ -12,4 +15,7 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface FollowsRepository extends PagingAndSortingRepository<Follows, Long> {
+
+    List<Follows> findAllByUser(User user);
+
 }

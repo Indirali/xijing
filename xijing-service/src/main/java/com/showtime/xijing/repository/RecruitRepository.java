@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Create with IntelliJ IDEA
  * User: Indira
@@ -13,4 +15,7 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface RecruitRepository extends PagingAndSortingRepository<Recruit, Long>, JpaSpecificationExecutor<Recruit> {
+
+    List<Recruit> findByUser(Long userId);
+
 }

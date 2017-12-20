@@ -1,9 +1,17 @@
 spring:
     datasource:
-        url: jdbc:mysql://rm-uf6g41we475x26qtto.mysql.rds.aliyuncs.com:3306/xijing?useUnicode=true&characterEncoding=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE&useSSL=false
+        url: jdbc:mysql://140.143.189.227:3306/xijing?useUnicode=true&characterEncoding=utf8
         username: root
-        password: 3828399@lifan
+        password: root
         driver-class-name: com.mysql.jdbc.Driver
     redis:
       host: 127.0.0.1
       port: 6379
+
+logging:
+  file: logs/xijing.log
+  config: classpath:logback-spring.xml
+  level:
+#     org.springframework: DEBUG
+     org.hibernate: DEBUG
+     org.hibernate.type.descriptor.sql: TRACE

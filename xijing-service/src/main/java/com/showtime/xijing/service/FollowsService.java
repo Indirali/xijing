@@ -1,11 +1,13 @@
 package com.showtime.xijing.service;
 
 import com.showtime.xijing.entity.Follows;
+import com.showtime.xijing.entity.User;
 import com.showtime.xijing.repository.FollowsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Create with IntelliJ IDEA
@@ -21,6 +23,14 @@ public class FollowsService {
     @Autowired
     public FollowsService(FollowsRepository followsRepository) {
         this.followsRepository = followsRepository;
+    }
+
+    public List<Follows> findAllByUser(User user) {
+        return followsRepository.findAllByUser(user);
+    }
+
+    public void deleteFollow(long id) {
+        followsRepository.delete(id);
     }
 
     public Follows save(Follows follows) {

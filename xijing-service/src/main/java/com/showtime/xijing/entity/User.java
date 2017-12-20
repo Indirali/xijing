@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户表
@@ -37,6 +38,10 @@ public class User extends BaseEntity<Long> {
 
     private int age;
 
+    private String moka;
+
+    private String video;
+
     private String introduction;
 
     @OneToOne
@@ -60,5 +65,8 @@ public class User extends BaseEntity<Long> {
     private int status;
 
     private Date lastLoginTime;
+
+    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    private List<UserFile> userFiles;
 
 }

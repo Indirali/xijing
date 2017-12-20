@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -33,6 +32,10 @@ public class RecruitInfo extends BaseEntity<Long> {
     private boolean organization;
 
     private int amount;
+
+    private boolean video;
+
+    private boolean moka;
 
     private String remarks;
 

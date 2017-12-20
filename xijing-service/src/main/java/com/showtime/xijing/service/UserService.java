@@ -33,6 +33,10 @@ public class UserService {
         this.userInfoRepository = userInfoRepository;
     }
 
+    public User findOne(long id) {
+        return userRepository.findOne(id);
+    }
+
     public User findByOpenId(String openId) {
         return userRepository.findByOpenId(openId);
     }

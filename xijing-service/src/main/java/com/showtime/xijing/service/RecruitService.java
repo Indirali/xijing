@@ -55,6 +55,10 @@ public class RecruitService {
         return recruitRepository.findOne(id);
     }
 
+    public List<Recruit> findByUser(Long userId) {
+        return recruitRepository.findByUser(userId);
+    }
+
     public Recruit save(Recruit recruit) {
         if (recruit.getId() != null) {
             recruit.setUpdateTime(new Date());
