@@ -1,6 +1,7 @@
 package com.showtime.xijing.web.controller;
 
 import com.showtime.xijing.common.Result;
+import com.showtime.xijing.entity.Recruit;
 import com.showtime.xijing.entity.RecruitCondition;
 import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.entity.User;
@@ -62,10 +63,14 @@ public class RecruitController {
         }
         validateService.validateObject(recruitVo.getRecruit());
         validateService.validateObjectList(recruitVo.getRecruitInfos());
-        recruitService.save(recruitVo.getRecruit());
-        for (RecruitInfo recruitInfo : recruitVo.getRecruitInfos()) {
-            recruitInfoService.save(recruitInfo);
+        Long[] recruitInfoIds = new Long[recruitVo.getRecruitInfos().size()];
+        for (int i = 0; i < recruitVo.getRecruitInfos().size(); i++) {
+            RecruitInfo base = recruitInfoService.save(recruitVo.getRecruitInfos().get(i));
+            recruitInfoIds[i] = base.getId();
         }
+        Recruit recruit = recruitVo.getRecruit();
+        recruit.setRecruitInfos(recruitInfoService.findByIdIn(recruitInfoIds));
+        recruitService.save(recruit);
         return Result.success();
     }
 
@@ -77,8 +82,7 @@ public class RecruitController {
      */
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public Result findRecruitInfo(long recruitId) {
-        return Result.success().data("recruit", recruitService.findById(recruitId))
-                .data("recruitInfo", recruitInfoService.findByRecruitId(recruitId));
+        return Result.success(recruitService.findById(recruitId));
     }
 
 }

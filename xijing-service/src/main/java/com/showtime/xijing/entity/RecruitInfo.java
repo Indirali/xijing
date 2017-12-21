@@ -21,10 +21,6 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = false)
 public class RecruitInfo extends BaseEntity<Long> {
 
-    @NotNull(message = "招聘不能为空.")
-    @ManyToOne
-    private Recruit recruit;
-
     private int sex;
 
     private int age;

@@ -5,6 +5,8 @@ import com.showtime.xijing.enums.RecruitType;
 import com.showtime.xijing.enums.SuperStarType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.awt.*;
@@ -48,6 +50,10 @@ public class Recruit extends BaseEntity<Long> {
 
     @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private List<UserFile> userFiles;
+
+    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<RecruitInfo> recruitInfos;
 
     @Transient
     private int count;

@@ -16,6 +16,8 @@ import java.util.List;
 @Repository
 public interface RecruitInfoRepository extends PagingAndSortingRepository<RecruitInfo, Long> {
 
+    List<RecruitInfo> findByIdIn(Long[] recruitInfoIds);
+
     List<RecruitInfo> findByRecruit(Recruit recruit);
 
     int countByRecruit(long recruitId);

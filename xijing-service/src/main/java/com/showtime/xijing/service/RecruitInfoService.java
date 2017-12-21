@@ -40,6 +40,10 @@ public class RecruitInfoService {
         return recruitInfos;
     }
 
+    public List<RecruitInfo> findByIdIn(Long[] recruitInfoIds) {
+        return recruitInfoRepository.findByIdIn(recruitInfoIds);
+    }
+
     public RecruitInfo save(RecruitInfo recruitInfo) {
         if (recruitInfo.getId() != null) {
             recruitInfo.setUpdateTime(new Date());
