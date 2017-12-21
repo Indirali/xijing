@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.awt.*;
 import java.util.Date;
 import java.util.List;
 
@@ -25,11 +26,13 @@ public class User extends BaseEntity<Long> {
     @NotNull(message = "open_id 不能为空.")
     private String openId;
 
-    private String place;
+    private Point place;
 
+    @NotNull(message = "昵称不能为空.")
     @Convert(converter = EmojiConverter.class)
     private String nickname;
 
+    @NotNull(message = "不能为空.")
     private String headPortrait;
 
     // 0 未知  1 男   2 女
@@ -38,9 +41,11 @@ public class User extends BaseEntity<Long> {
 
     private int age;
 
-    private String moka;
+    @OneToOne
+    private UserFile moka;
 
-    private String video;
+    @OneToOne
+    private UserFile video;
 
     private String introduction;
 
@@ -54,6 +59,7 @@ public class User extends BaseEntity<Long> {
 
     private int authStatus;
 
+    @OneToOne
     private UserFile wxImage;
 
     private String wxNumber;

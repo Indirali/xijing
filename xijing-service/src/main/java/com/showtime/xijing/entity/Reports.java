@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -24,6 +25,7 @@ import java.util.Date;
 public class Reports extends BaseEntity<Long> {
 
     @ManyToOne
+    @NotNull(message = "用户不能为空.")
     private User user;
 
     @Enumerated(EnumType.STRING)

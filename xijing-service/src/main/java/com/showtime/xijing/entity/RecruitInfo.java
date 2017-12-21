@@ -37,6 +37,8 @@ public class RecruitInfo extends BaseEntity<Long> {
 
     private boolean moka;
 
+    private int status;
+
     private String remarks;
 
     @Transient

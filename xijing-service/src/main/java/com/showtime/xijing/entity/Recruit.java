@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.awt.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 招聘表
@@ -35,13 +36,18 @@ public class Recruit extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)
     private SuperStarType superStar;
 
-    private String fileIds;
+    private boolean urgent;
+
+    private boolean recommend;
 
     private String remarks;
 
     private int status;
 
     private Date participationTime;
+
+    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    private List<UserFile> userFiles;
 
     @Transient
     private int count;

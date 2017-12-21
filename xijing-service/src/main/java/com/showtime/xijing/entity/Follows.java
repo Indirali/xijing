@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 /**
  * 关注表
@@ -18,8 +19,10 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = false)
 public class Follows extends BaseEntity<Long> {
 
+    @NotNull(message = "用户不能为空.")
     private User user;
 
+    @NotNull(message = "关注用户不能为空.")
     private User followUser;
 
     private int status;

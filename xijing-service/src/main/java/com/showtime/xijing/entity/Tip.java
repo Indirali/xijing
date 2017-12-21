@@ -1,10 +1,12 @@
 package com.showtime.xijing.entity;
 
 import com.showtime.xijing.common.entity.BaseEntity;
+import com.showtime.xijing.enums.TipType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  * 申请表
@@ -16,11 +18,14 @@ import javax.persistence.Entity;
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = false)
-public class Applicants extends BaseEntity<Long> {
+public class Tip extends BaseEntity<Long> {
 
+    @ManyToOne
     private User user;
 
     private Recruit recruit;
+
+    private TipType tipType;
 
     private int status;
 

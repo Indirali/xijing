@@ -1,6 +1,6 @@
 package com.showtime.xijing.repository;
 
-import com.showtime.xijing.entity.Applicants;
+import com.showtime.xijing.entity.Tip;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
  * Time: 13:06
  **/
 @Repository
-public interface ApplicantsRepository extends PagingAndSortingRepository<Applicants, Long> {
+public interface TipRepository extends PagingAndSortingRepository<Tip, Long> {
 }
