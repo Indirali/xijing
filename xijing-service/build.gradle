@@ -18,6 +18,7 @@ dependencies {
     compile libraries.'httpmime'
     compile libraries.'commons-beanutils'
     compile libraries.'commons-lang'
+    compile libraries.'commons-fileupload'
     compile libraries.'qiniu-java-sdk'                  // 七牛
     compile libraries.'zxing-core'                      // zxing
 }

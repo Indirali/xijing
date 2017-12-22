@@ -1,11 +1,13 @@
 package com.showtime.xijing.service;
 
+import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.entity.Reports;
 import com.showtime.xijing.repository.ReportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Create with IntelliJ IDEA
@@ -36,5 +38,10 @@ public class ReportsService {
     public Reports findById(long id) {
         return reportsRepository.findOne(id);
     }
+
+    public List<Reports> findByReportRecruitInfoAndStatus(RecruitInfo recruitInfo, int status) {
+        return reportsRepository.findByReportRecruitInfoAndStatus(recruitInfo, status);
+    }
+
 
 }

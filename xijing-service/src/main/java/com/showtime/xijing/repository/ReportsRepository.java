@@ -6,6 +6,8 @@ import com.showtime.xijing.entity.Reports;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Create with IntelliJ IDEA
  * User: Indira
@@ -18,5 +20,7 @@ public interface ReportsRepository extends PagingAndSortingRepository<Reports, L
     int countByReportRecruit(Recruit recruit);
 
     int countByReportRecruitInfo(RecruitInfo recruitInfo);
+
+    List<Reports> findByReportRecruitInfoAndStatus(RecruitInfo recruitInfo, int status);
 
 }

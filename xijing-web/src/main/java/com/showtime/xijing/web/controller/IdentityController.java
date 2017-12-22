@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -38,9 +37,7 @@ public class IdentityController {
      * @return json格式数据 如果成功返回值为user对象
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public Result login(@RequestParam(name = "encryptedData") String encryptedData,
-                        @RequestParam(name = "iv") String iv,
-                        @RequestParam(name = "code") String code) {
+    public Result login(String encryptedData, String iv, String code) {
         log.info("用户进入");
         Assert.notNull(code, "code 不能为空");
         log.info("微信小程序登录，请求数据为[ code:" + code + "]");

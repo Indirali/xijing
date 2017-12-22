@@ -48,11 +48,12 @@ public class Recruit extends BaseEntity<Long> {
 
     private Date participationTime;
 
+    @Fetch(FetchMode.SUBSELECT)
     @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private List<UserFile> userFiles;
 
-    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private List<RecruitInfo> recruitInfos;
 
     @Transient

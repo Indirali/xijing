@@ -17,7 +17,7 @@ public class QiniuUpload {
 
     private final static String SECRET_KEY = "rebWZM-EPm1qoATTatoSQU5yzaVMs3NeLG3t4fA2";
 
-    private final static String BUCKET = "dohkochouti";
+    private final static String BUCKET = "xijing";
 
     public static String qiniuUpload(String filePath, String fileName) {
         UploadManager uploadManager = new UploadManager();

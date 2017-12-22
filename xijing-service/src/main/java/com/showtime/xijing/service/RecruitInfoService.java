@@ -1,10 +1,7 @@
 package com.showtime.xijing.service;
 
-import com.showtime.xijing.entity.Recruit;
 import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.repository.RecruitInfoRepository;
-import com.showtime.xijing.repository.RecruitRepository;
-import com.showtime.xijing.repository.ReportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,24 +17,15 @@ import java.util.List;
 @Service
 public class RecruitInfoService {
 
-    private ReportsRepository reportsRepository;
-    private RecruitRepository recruitRepository;
     private RecruitInfoRepository recruitInfoRepository;
 
     @Autowired
-    public RecruitInfoService(ReportsRepository reportsRepository,
-                              RecruitRepository recruitRepository,
-                              RecruitInfoRepository recruitInfoRepository) {
-        this.reportsRepository = reportsRepository;
-        this.recruitRepository = recruitRepository;
+    public RecruitInfoService(RecruitInfoRepository recruitInfoRepository) {
         this.recruitInfoRepository = recruitInfoRepository;
     }
 
-    public List<RecruitInfo> findByRecruitId(long recruitId) {
-        Recruit recruit = recruitRepository.findOne(recruitId);
-        List<RecruitInfo> recruitInfos = recruitInfoRepository.findByRecruit(recruit);
-        recruitInfos.forEach(recruitInfo -> recruitInfo.setReportCount(reportsRepository.countByReportRecruitInfo(recruitInfo)));
-        return recruitInfos;
+    public RecruitInfo findOne(long id) {
+        return recruitInfoRepository.findOne(id);
     }
 
     public List<RecruitInfo> findByIdIn(Long[] recruitInfoIds) {

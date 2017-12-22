@@ -41,11 +41,9 @@ public class User extends BaseEntity<Long> {
 
     private int age;
 
-    @OneToOne
-    private UserFile moka;
+    /*private long moka;
 
-    @OneToOne
-    private UserFile video;
+    private long video;*/
 
     private String introduction;
 
@@ -59,8 +57,7 @@ public class User extends BaseEntity<Long> {
 
     private int authStatus;
 
-    @OneToOne
-    private UserFile wxImage;
+    private long wxImage;
 
     private String wxNumber;
 
