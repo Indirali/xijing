@@ -1,11 +1,13 @@
 package com.showtime.xijing.service;
 
 import com.showtime.xijing.entity.Confirm;
+import com.showtime.xijing.entity.User;
 import com.showtime.xijing.repository.ConfirmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Create with IntelliJ IDEA
@@ -32,4 +34,11 @@ public class ConfirmService {
         return confirmRepository.save(confirm);
     }
 
+    public Confirm findByUserAndCreateTime(User user, Date date) {
+        return confirmRepository.findByUserAndCreateTime(user, date);
+    }
+
+    public List<Confirm> findByUser(User user) {
+        return confirmRepository.findByUser(user);
+    }
 }

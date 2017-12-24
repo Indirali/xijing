@@ -1,6 +1,7 @@
 package com.showtime.xijing.web.controller;
 
 import com.showtime.xijing.common.Result;
+import com.showtime.xijing.entity.UserFile;
 import com.showtime.xijing.service.UploadingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,15 @@ public class UserFileController {
         this.uploadingImage = uploadingImage;
     }
 
-    @RequestMapping(value = "/info", method = RequestMethod.POST)
-    public Result findOnlyUser(MultipartFile mf, String type) {
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public Result findOnlyUser(MultipartFile mf, boolean type) {
+        UserFile userFile = null;
         try {
-            uploadingImage.uploadingImage(mf, type);
+            userFile = uploadingImage.uploadingImage(mf, type);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Result.success();
+        return Result.success(userFile);
     }
 
 }

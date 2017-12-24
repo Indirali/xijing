@@ -7,11 +7,15 @@ import com.showtime.xijing.utils.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.showtime.xijing.enums.UploadType.Image;
+import static com.showtime.xijing.enums.UploadType.Video;
 
 /**
  * Create with IntelliJ IDEA
@@ -38,7 +42,8 @@ public class UploadingService {
     /**
      * @param mf 图片流
      */
-    public UserFile uploadingImage(MultipartFile mf, String type) throws IOException {
+    public UserFile uploadingImage(MultipartFile mf, boolean type) throws IOException {
+        papers(mf, type);
         String filename = RandomUtil.getRandomFileName();
         String fileName = mf.getOriginalFilename();
         String ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();
@@ -46,42 +51,43 @@ public class UploadingService {
         UserFile file = new UserFile();
         file.setFileName(fileName);
         file.setFormat(ext);
-        file.setType(type);
+        file.setType(type ? Image : Video);
+        file.setUrl(url);
         QiniuUtil.uploadFile(mf.getInputStream(), BUCKET_NAME, filename);
         return userFileRepository.save(file);
     }
 
 
     /**
-     * 对上传的图片大小进行判断
+     * 对上传的文件大小进行判断
      *
-     * @param imgFile 图片流
+     * @param file 图片流
      */
 
-    public boolean papers(MultipartFile imgFile) {
-        if (imgFile == null) {
-            log.info("上传图片大小是：" + imgFile.getSize());
-            if (imgFile.getSize() < 10485760) {
-                List<String> fileTypes = new ArrayList<String>();
-                fileTypes.add("jpg");
-                fileTypes.add("jpeg");
-                fileTypes.add("png");
-                String fileName = imgFile.getOriginalFilename();
-                //获取上传文件类型的扩展名,先得到.的位置，再截取从.的下一个位置到文件的最后，最后得到扩展名
-                String ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
-                //对扩展名进行小写转换
-                ext = ext.toLowerCase();
-                if (fileTypes.contains(ext)) { //如果扩展名属于允许上传的类型，则创建文件
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
+    private void papers(MultipartFile file, boolean type) {
+        Assert.notNull(file, "文件为空");
+        log.info("上传文件大小是：" + file.getSize());
+        if (type) {
+            Assert.isTrue(file.getSize() < 10 * 1024 * 1024, "图片大小超过10M!");
         } else {
-            return false;
+            Assert.isTrue(file.getSize() < 30 * 1024 * 1024, "视频大小超过30M!");
         }
+        List<String> fileTypes = new ArrayList<>();
+        if (type) {
+            fileTypes.add("jpg");
+            fileTypes.add("jpeg");
+            fileTypes.add("png");
+        } else {
+            fileTypes.add(".wma");
+            fileTypes.add(".avi");
+            fileTypes.add(".rm");
+            fileTypes.add(".mpg");
+            fileTypes.add(".mp4");
+            fileTypes.add(".mov");
+        }
+        String fileName = file.getOriginalFilename();
+        String ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();
+        Assert.isTrue(!fileTypes.contains(ext), "文件格式错误");
     }
 
 }
