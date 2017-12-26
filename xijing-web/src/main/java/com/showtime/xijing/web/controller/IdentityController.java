@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import com.showtime.xijing.common.Result;
 import com.showtime.xijing.entity.User;
 import com.showtime.xijing.service.UserService;
+import com.showtime.xijing.utils.GaoDeMapUtil;
 import com.showtime.xijing.web.utils.AesCbcUtil;
 import com.showtime.xijing.web.utils.UserInfoUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.awt.*;
 import java.util.Date;
 
 /**
@@ -38,7 +38,7 @@ public class IdentityController {
      * @return json格式数据 如果成功返回值为user对象
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public Result login(String encryptedData, String iv, String code, Point point) {
+    public Result login(String encryptedData, String iv, String code, double longitude, double latitude) {
         log.info("用户进入");
         Assert.notNull(code, "code 不能为空");
         log.info("微信小程序登录，请求数据为[ code:" + code + "]");
@@ -61,12 +61,17 @@ public class IdentityController {
                     base.setSex(userInfo.getAsJsonObject().get("gender").getAsInt());
                     base.setHeadPortrait(userInfo.getAsJsonObject().get("avatarUrl").getAsString());
                     base.setOpenId(openid);
-                    base.setPlace(point);
+                    base.setLongitude(longitude);
+                    base.setLatitude(latitude);
                     base.setLastLoginTime(new Date());
+                    base.setPlace(GaoDeMapUtil.getLocation(longitude, latitude));
                     user = userService.save(base);
                     newUser = true;
                 } else {
+                    user.setLongitude(longitude);
+                    user.setLatitude(latitude);
                     user.setLastLoginTime(new Date());
+                    user.setPlace(GaoDeMapUtil.getLocation(longitude, latitude));
                     userService.save(user);
                 }
             }

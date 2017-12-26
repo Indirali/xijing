@@ -1,8 +1,8 @@
 spring:
     datasource:
-        url: jdbc:mysql://140.143.189.227:3306/xijing?useUnicode=true&characterEncoding=utf8
+        url: jdbc:mysql://www.xijinghuiyan.com:3306/xijing?useUnicode=true&characterEncoding=utf8
         username: root
-        password: root
+        password: 3828399.lifan
         driver-class-name: com.mysql.jdbc.Driver
     redis:
       host: 127.0.0.1

@@ -9,7 +9,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.awt.*;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +32,11 @@ public class Recruit extends BaseEntity<Long> {
     @ManyToOne
     private User user;
 
-    private Point point;
+    private String point;
+
+    private double longitude;
+
+    private double latitude;
 
     @Enumerated(EnumType.STRING)
     private SuperStarType superStar;
