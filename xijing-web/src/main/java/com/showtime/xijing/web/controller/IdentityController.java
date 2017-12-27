@@ -6,8 +6,9 @@ import com.showtime.xijing.common.Result;
 import com.showtime.xijing.entity.User;
 import com.showtime.xijing.service.UserService;
 import com.showtime.xijing.utils.GaoDeMapUtil;
+import com.showtime.xijing.utils.RequestAll;
 import com.showtime.xijing.web.utils.AesCbcUtil;
-import com.showtime.xijing.web.utils.UserInfoUtil;
+import com.showtime.xijing.utils.WXRequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -42,8 +43,8 @@ public class IdentityController {
         log.info("用户进入");
         Assert.notNull(code, "code 不能为空");
         log.info("微信小程序登录，请求数据为[ code:" + code + "]");
-        String token = UserInfoUtil.getWebAccess(code);  // 获取用户openid的实际网址
-        String rec = UserInfoUtil.httpGet(token);  // 通过HttpGet方法将token发送至微信服务器并获得其回执
+        String token = WXRequestUtil.getWebAccess(code);  // 获取用户openid的实际网址
+        String rec = RequestAll.httpGet(token);  // 通过HttpGet方法将token发送至微信服务器并获得其回执
         log.info("微信回执为:" + rec);
         JsonElement json = new JsonParser().parse(rec);  // 使用json类解析结果
         Assert.isTrue(json != null, "微信响应错误!");

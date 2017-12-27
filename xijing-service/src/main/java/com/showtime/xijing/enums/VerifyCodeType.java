@@ -8,9 +8,10 @@ package com.showtime.xijing.enums;
  **/
 public enum VerifyCodeType {
 
-    VERIFY_COUNT,
-    VERIFY_CODE_FORGET_PASSWORD,
-    VERIFY_CODE_REGISTER,
-    VERIFY_CODE_CHANGE_PHONE, //修改手机号
+    Verify_Code_Count,
+    Verify_Code_Forget_Password,
+    Verify_Code_Register,
+    Verify_Code_Change_Phone, //修改手机号
+    Verify_Code_Access_Token
 
 }

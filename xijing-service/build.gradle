@@ -9,6 +9,7 @@ dependencies {
     compile project(':xijing-common')
 
     compile libraries.'spring-boot-starter-data-redis'
+    compile libraries.'spring-boot-starter-activemq'
     compile libraries.'yunpian-java-sdk'
     compile libraries.'mysql-connector-java'
     compile libraries.'druid'

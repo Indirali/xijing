@@ -30,12 +30,12 @@ dependencies {
 bootRun {
 
     // Spring Devtools 热部署默认监测路径
-//    jvmArgs = ["-Dspring.devtools.restart.additional-paths=out"]
-
+    // jvmArgs = ["-Dspring.devtools.restart.additional-paths=out"]
     //  解决 oh my zsh + tmux 下日志颜色不显示问题
     if (System.getenv()["ZSH_TMUX_TERM"] != null) {
         systemProperties 'spring.output.ansi.enabled': 'always'
     }
+
 }
 
 clean {

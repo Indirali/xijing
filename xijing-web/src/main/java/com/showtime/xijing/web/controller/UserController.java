@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.showtime.xijing.enums.VerifyCodeType.VERIFY_CODE_CHANGE_PHONE;
+import static com.showtime.xijing.enums.VerifyCodeType.Verify_Code_Change_Phone;
 
 /**
  * Create with IntelliJ IDEA
@@ -79,7 +79,7 @@ public class UserController {
     public Result updateUser(String phoneNumber, String code, String openId) {
         User user = userService.findByOpenId(openId);
         Assert.notNull(user, "用户不存在!");
-        verifyCodeService.detectVerifyCode(phoneNumber, code, VERIFY_CODE_CHANGE_PHONE);
+        verifyCodeService.detectVerifyCode(phoneNumber, code, Verify_Code_Change_Phone);
         user.setPhoneNumber(phoneNumber);
         userService.save(user);
         return Result.success();

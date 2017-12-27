@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2017-12-25 18:08:08
+Date: 2017-12-27 18:26:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -88,6 +88,7 @@ CREATE TABLE `recruit_info` (
   `age` int(1) NOT NULL COMMENT '年龄',
   `organization` tinyint(1) NOT NULL,
   `amount` int(11) NOT NULL COMMENT '数量',
+  `salary` int(11) NOT NULL DEFAULT '0' COMMENT '工资',
   `video` tinyint(1) NOT NULL DEFAULT '1' COMMENT '自我介绍视频',
   `moka` tinyint(1) NOT NULL DEFAULT '1' COMMENT '摩卡',
   `remarks` varchar(255) DEFAULT NULL COMMENT '备注',
@@ -99,8 +100,8 @@ CREATE TABLE `recruit_info` (
 -- ----------------------------
 -- Records of recruit_info
 -- ----------------------------
-INSERT INTO `recruit_info` VALUES ('1', '2', '22', '1', '10', '1', '1', null, '2017-12-19 11:43:30', null);
-INSERT INTO `recruit_info` VALUES ('2', '1', '22', '1', '50', '1', '1', null, '2017-12-15 15:41:03', null);
+INSERT INTO `recruit_info` VALUES ('1', '2', '22', '1', '10', '0', '1', '1', null, '2017-12-19 11:43:30', null);
+INSERT INTO `recruit_info` VALUES ('2', '1', '22', '1', '50', '0', '1', '1', null, '2017-12-15 15:41:03', null);
 
 -- ----------------------------
 -- Table structure for recruit_recruit_infos
@@ -210,7 +211,7 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'oL7QE0TJ5zKxPK7rBmPmdsIPcR4A', '中国-北京市', '116.354', '39.941', '%F0%9F%99%88+%E6%B5%A3%E8%8A%B1%E6%B0%B4%E6%A6%AD', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKlEeib4YaCkwyicbKvscxD3LNZeicWlKUoWyC47JjdnSCU0lqu0xU5QR5lTHuh1pPQy6vicMNOrVCiaKw/0', '2', null, null, '0', null, null, null, null, '0', '0', '0', null, null, '0', '2017-12-25 16:26:29', '0', '2017-12-25 11:32:28', null);
-INSERT INTO `user` VALUES ('17', 'oL7QE0f0zRL4I4FRgLRWSvrAMQ-o', '中国-河北省-唐山市', '118.192', '39.631', '%E4%BD%A0%E7%9C%8B%E8%B5%B7%E6%9D%A5%E5%BE%88%E5%A5%BD%E5%90%83%F0%9F%91%8F', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJ9W9Tt4l7nuc08BZUWzzYUIAXXOxonAN569FGvfMja9IRiap4LMqC04I04AibibbNYbajvZxUAgdicxw/0', '1', null, null, '0', null, null, null, null, '0', '0', '0', null, null, '0', '2017-12-25 18:05:51', '0', '2017-12-25 16:07:10', null);
+INSERT INTO `user` VALUES ('17', 'oL7QE0f0zRL4I4FRgLRWSvrAMQ-o', '中国-河北省-唐山市', '118.192', '39.631', '%E4%BD%A0%E7%9C%8B%E8%B5%B7%E6%9D%A5%E5%BE%88%E5%A5%BD%E5%90%83%F0%9F%91%8F', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJ9W9Tt4l7nuc08BZUWzzYUIAXXOxonAN569FGvfMja9IRiap4LMqC04I04AibibbNYbajvZxUAgdicxw/0', '1', null, null, '0', null, null, null, null, '0', '0', '0', null, null, '0', '2017-12-26 11:25:01', '0', '2017-12-25 16:07:10', null);
 
 -- ----------------------------
 -- Table structure for user_file

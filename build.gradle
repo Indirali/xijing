@@ -1,13 +1,14 @@
 apply from: 'dependencies.gradle'
 
 buildscript {
+
     repositories {
         mavenLocal()
         maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
+        maven { url "https://repo1.maven.org/maven2" }
         jcenter()
     }
+
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE"
 
@@ -18,9 +19,8 @@ buildscript {
         classpath 'io.github.swagger2markup:swagger2markup-gradle-plugin:1.2.0'
         classpath 'io.github.swagger2markup:swagger2markup-import-files-ext:1.3.1'
     }
+
 }
-
-
 
 allprojects {
 
@@ -37,18 +37,17 @@ allprojects {
     group = 'xijing'
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
+
     compileJava.options.encoding = 'UTF-8'
     compileGroovy.options.encoding = 'UTF-8'
     compileTestJava.options.encoding = 'UTF-8'
     compileTestGroovy.options.encoding = 'UTF-8'
     javadoc.options.encoding = 'UTF-8'
 
-
     repositories {
         mavenLocal()
         maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
+        maven { url "https://repo1.maven.org/maven2" }
         jcenter()
     }
 
@@ -69,7 +68,6 @@ subprojects {
         // 为每个项目加载 Spring 开发热部署插件
         // 在打包时将会被自动排除
         compile libraries.'spring-boot-devtools'
-
         testCompile libraries.'spring-boot-starter-test'
     }
 
@@ -83,8 +81,7 @@ subprojects {
     repositories {
         mavenLocal()
         maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
+        maven { url "https://repo1.maven.org/maven2" }
         jcenter()
     }
 
@@ -92,6 +89,7 @@ subprojects {
         description = "Gradle Wrapper Task"
         gradleVersion = '4.3.1'
     }
+
 }
 
 

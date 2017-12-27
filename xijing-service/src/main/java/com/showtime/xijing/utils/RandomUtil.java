@@ -34,11 +34,4 @@ public class RandomUtil {
         return rannum + str;// 当前时间
     }
 
-    public static void main(String[] args) {
-
-        String fileName = RandomUtil.getRandomFileName();
-
-        System.out.println(fileName);//8835920140307
-    }
-
 }

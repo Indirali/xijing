@@ -2,12 +2,15 @@ package com.showtime.xijing.service;
 
 import com.showtime.xijing.entity.User;
 import com.showtime.xijing.entity.UserInfo;
+import com.showtime.xijing.enums.PushType;
 import com.showtime.xijing.repository.UserInfoRepository;
 import com.showtime.xijing.repository.UserRepository;
+import com.showtime.xijing.utils.WXRequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,12 +27,15 @@ import java.util.Date;
 public class UserService {
 
     private UserRepository userRepository;
+    private VerifyCodeService verifyCodeService;
     private UserInfoRepository userInfoRepository;
 
     @Autowired
     public UserService(UserRepository userRepository,
+                       VerifyCodeService verifyCodeService,
                        UserInfoRepository userInfoRepository) {
         this.userRepository = userRepository;
+        this.verifyCodeService = verifyCodeService;
         this.userInfoRepository = userInfoRepository;
     }
 
@@ -61,6 +67,14 @@ public class UserService {
         user.setCreateTime(new Date());
         user.setUserInfo(info);
         userRepository.save(user);
+    }
+
+    @JmsListener(destination = "userQueue")
+    public void receiveQueue(PushType pushType) {
+        String accessToken = verifyCodeService.getWXAccessTokenCache();
+        if (pushType == PushType.Recruit_Fail) {
+            WXRequestUtil.sendNotification(accessToken);
+        }
     }
 
 }

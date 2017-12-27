@@ -27,6 +27,8 @@ public class RecruitInfo extends BaseEntity<Long> {
 
     private int amount;
 
+    private int salary;
+
     private boolean video;
 
     private boolean moka;
@@ -37,7 +39,6 @@ public class RecruitInfo extends BaseEntity<Long> {
 
     @Transient
     private int reportCount;
-
 
 
 }
