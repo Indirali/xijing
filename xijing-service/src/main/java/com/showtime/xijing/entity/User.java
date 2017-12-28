@@ -27,9 +27,9 @@ public class User extends BaseEntity<Long> {
 
     private String place;
 
-    private double longitude;
+    private String longitude;
 
-    private double latitude;
+    private String latitude;
 
     @NotNull(message = "昵称不能为空.")
     @Convert(converter = EmojiConverter.class)

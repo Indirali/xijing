@@ -34,9 +34,9 @@ public class Recruit extends BaseEntity<Long> {
 
     private String point;
 
-    private double longitude;
+    private String longitude;
 
-    private double latitude;
+    private String latitude;
 
     @Enumerated(EnumType.STRING)
     private SuperStarType superStar;

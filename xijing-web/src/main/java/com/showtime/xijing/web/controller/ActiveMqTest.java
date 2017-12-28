@@ -24,7 +24,7 @@ public class ActiveMqTest {
     @Autowired
     private JmsMessagingTemplate jmsMessagingTemplate;
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 1000000)
     // 每3s执行1次
     public void send() {
         log.info(">> send !!!");

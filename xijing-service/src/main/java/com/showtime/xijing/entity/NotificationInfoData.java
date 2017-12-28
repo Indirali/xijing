@@ -11,13 +11,13 @@ import lombok.EqualsAndHashCode;
  **/
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class NotificationDatas {
+public class NotificationInfoData {
 
     private String value;
 
     private String color;
 
-    public NotificationDatas(String value, String color) {
+    public NotificationInfoData(String value, String color) {
         this.value = value;
         this.color = color;
     }

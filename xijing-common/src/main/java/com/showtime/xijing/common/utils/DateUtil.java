@@ -62,7 +62,7 @@ public class DateUtil {
     public static String toString(Date date) {
         String time;
         SimpleDateFormat formater = new SimpleDateFormat();
-        formater.applyPattern("yyyy-MM-dd hh:mm:ss");
+        formater.applyPattern("yyyy年MM月dd日 hh:mm:ss");
         time = formater.format(date);
         return time;
     }

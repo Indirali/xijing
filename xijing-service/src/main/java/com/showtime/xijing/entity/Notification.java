@@ -1,26 +1,38 @@
 package com.showtime.xijing.entity;
 
+import com.showtime.xijing.common.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 /**
  * Create with IntelliJ IDEA
  * User: Indira
- * Date: 2017/12/27
- * Time: 16:37
+ * Date: 2017/12/28
+ * Time: 12:12
  **/
 @Data
+@Entity
 @EqualsAndHashCode(callSuper = false)
-public class Notification {
+public class Notification extends BaseEntity<Long> {
 
-    private String touser;
+    @ManyToOne
+    @NotNull(message = "用户不能为空.")
+    private User user;
 
-    private String template_id;
+    @ManyToOne
+    @NotNull(message = "招聘详情不能为空.")
+    private RecruitInfo recruitInfo;
 
-    private String page;
+    private String number;
 
-    private String form_id;
+    private String type;
 
-    private NotificationDatas[] data;
+    private int count;
+
+    private int status;
 
 }

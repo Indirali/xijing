@@ -39,7 +39,7 @@ public class IdentityController {
      * @return json格式数据 如果成功返回值为user对象
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public Result login(String encryptedData, String iv, String code, double longitude, double latitude) {
+    public Result login(String encryptedData, String iv, String code, String longitude, String latitude) {
         log.info("用户进入");
         Assert.notNull(code, "code 不能为空");
         log.info("微信小程序登录，请求数据为[ code:" + code + "]");

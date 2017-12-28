@@ -15,6 +15,7 @@ dependencies {
     compile libraries.'lombok'
     compile libraries.'spring-webmvc'
     compile libraries.'commons-lang'
+    compile libraries.'commons-httpclient'
 }
 
 // 此模块不需要 Spring Boot 插件支持

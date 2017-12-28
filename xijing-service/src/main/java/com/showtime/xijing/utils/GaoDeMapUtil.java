@@ -26,7 +26,7 @@ public class GaoDeMapUtil {
      * @param latitude  纬度
      * @return
      */
-    public static String getLocation(double longitude, double latitude) {
+    public static String getLocation(String longitude, String latitude) {
         String url = MAP_CODEURL;
         String location = longitude + "," + latitude;
         String params = "key=" + GAODEAPPID + "&location=" + location;

@@ -19,7 +19,7 @@ public interface ReportsRepository extends PagingAndSortingRepository<Reports, L
 
     int countByReportRecruit(Recruit recruit);
 
-    int countByReportRecruitInfo(RecruitInfo recruitInfo);
+    List<Reports> findByIdIn(Long[] ids);
 
     List<Reports> findByReportRecruitInfoAndStatus(RecruitInfo recruitInfo, int status);
 
