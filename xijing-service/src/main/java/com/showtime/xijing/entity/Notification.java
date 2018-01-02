@@ -23,13 +23,11 @@ public class Notification extends BaseEntity<Long> {
     @NotNull(message = "用户不能为空.")
     private User user;
 
-    @ManyToOne
-    @NotNull(message = "招聘详情不能为空.")
-    private RecruitInfo recruitInfo;
+    private long otherId;
+
+    private String templateType;
 
     private String number;
-
-    private String type;
 
     private int count;
 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2017-12-27 18:26:01
+Date: 2018-01-02 15:25:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -53,6 +53,28 @@ CREATE TABLE `follows` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for notification
+-- ----------------------------
+DROP TABLE IF EXISTS `notification`;
+CREATE TABLE `notification` (
+  `id` bigint(32) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(32) NOT NULL,
+  `other_id` bigint(20) DEFAULT NULL COMMENT '各种ID',
+  `template_type` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '模板类型',
+  `number` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '模板号',
+  `count` int(11) NOT NULL DEFAULT '1' COMMENT '可使用次数',
+  `status` int(11) NOT NULL DEFAULT '0',
+  `create_time` datetime NOT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of notification
+-- ----------------------------
+INSERT INTO `notification` VALUES ('7', '1', '1', '1111', 'the formId is a mock one', '1', '1', '2017-12-28 18:10:14', null);
+
+-- ----------------------------
 -- Table structure for recruit
 -- ----------------------------
 DROP TABLE IF EXISTS `recruit`;
@@ -62,12 +84,14 @@ CREATE TABLE `recruit` (
   `type` varchar(32) NOT NULL COMMENT '类型',
   `user_id` bigint(32) NOT NULL COMMENT '招聘人ID',
   `point` varchar(32) DEFAULT NULL,
-  `longitude` double(8,3) DEFAULT NULL COMMENT '经度',
-  `latitude` double(8,3) DEFAULT NULL COMMENT '纬度',
+  `longitude` varchar(8) DEFAULT NULL COMMENT '经度',
+  `latitude` varchar(8) DEFAULT NULL COMMENT '纬度',
   `super_star` varchar(32) NOT NULL COMMENT '是否有明星',
   `remarks` varchar(200) DEFAULT NULL COMMENT '备注',
   `status` tinyint(2) NOT NULL COMMENT '状态',
   `participation_time` datetime NOT NULL COMMENT '参加时间',
+  `urgent` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否紧急 0 false   1 true',
+  `recommend` tinyint(1) NOT NULL DEFAULT '0' COMMENT '推荐  0 false   1 true',
   `create_time` datetime NOT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -76,7 +100,7 @@ CREATE TABLE `recruit` (
 -- ----------------------------
 -- Records of recruit
 -- ----------------------------
-INSERT INTO `recruit` VALUES ('1', '北京电视剧通告', 'Extra', '1', null, null, null, 'Hot_Star', null, '0', '2017-12-16 15:27:38', '2017-12-15 15:27:46', null);
+INSERT INTO `recruit` VALUES ('1', '北京电视剧通告', 'Extra', '1', '北京市嘻嘻哈哈', null, null, 'Hot_Star', null, '0', '2017-12-16 15:27:38', '0', '0', '2017-12-15 15:27:46', null);
 
 -- ----------------------------
 -- Table structure for recruit_info
@@ -88,10 +112,11 @@ CREATE TABLE `recruit_info` (
   `age` int(1) NOT NULL COMMENT '年龄',
   `organization` tinyint(1) NOT NULL,
   `amount` int(11) NOT NULL COMMENT '数量',
-  `salary` int(11) NOT NULL DEFAULT '0' COMMENT '工资',
+  `salary` int(11) NOT NULL DEFAULT '0' COMMENT '工资 0 无薪酬  -1 价格面议',
   `video` tinyint(1) NOT NULL DEFAULT '1' COMMENT '自我介绍视频',
   `moka` tinyint(1) NOT NULL DEFAULT '1' COMMENT '摩卡',
   `remarks` varchar(255) DEFAULT NULL COMMENT '备注',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 未结束 1 已结束',
   `create_time` datetime NOT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -100,8 +125,8 @@ CREATE TABLE `recruit_info` (
 -- ----------------------------
 -- Records of recruit_info
 -- ----------------------------
-INSERT INTO `recruit_info` VALUES ('1', '2', '22', '1', '10', '0', '1', '1', null, '2017-12-19 11:43:30', null);
-INSERT INTO `recruit_info` VALUES ('2', '1', '22', '1', '50', '0', '1', '1', null, '2017-12-15 15:41:03', null);
+INSERT INTO `recruit_info` VALUES ('1', '2', '22', '1', '10', '0', '1', '1', null, '0', '2017-12-19 11:43:30', null);
+INSERT INTO `recruit_info` VALUES ('2', '1', '22', '1', '50', '0', '1', '1', null, '0', '2017-12-15 15:41:03', null);
 
 -- ----------------------------
 -- Table structure for recruit_recruit_infos
@@ -153,6 +178,7 @@ CREATE TABLE `reports` (
 -- ----------------------------
 -- Records of reports
 -- ----------------------------
+INSERT INTO `reports` VALUES ('1', '1', '0', 'Person', '', '1', '1', '2017-12-28 10:54:45', '0', '2017-12-28 10:54:47', null);
 
 -- ----------------------------
 -- Table structure for tip
@@ -180,8 +206,8 @@ CREATE TABLE `user` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `open_id` varchar(64) NOT NULL COMMENT '微信唯一值',
   `place` varchar(32) DEFAULT NULL COMMENT '所在地点',
-  `longitude` double(8,3) DEFAULT NULL,
-  `latitude` double(8,3) DEFAULT NULL,
+  `longitude` varchar(8) DEFAULT NULL,
+  `latitude` varchar(8) DEFAULT NULL,
   `nickname` varchar(128) NOT NULL COMMENT '昵称',
   `head_portrait` varchar(128) NOT NULL COMMENT '头像',
   `sex` tinyint(1) NOT NULL COMMENT '性别 ',
@@ -210,7 +236,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'oL7QE0TJ5zKxPK7rBmPmdsIPcR4A', '中国-北京市', '116.354', '39.941', '%F0%9F%99%88+%E6%B5%A3%E8%8A%B1%E6%B0%B4%E6%A6%AD', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKlEeib4YaCkwyicbKvscxD3LNZeicWlKUoWyC47JjdnSCU0lqu0xU5QR5lTHuh1pPQy6vicMNOrVCiaKw/0', '2', null, null, '0', null, null, null, null, '0', '0', '0', null, null, '0', '2017-12-25 16:26:29', '0', '2017-12-25 11:32:28', null);
+INSERT INTO `user` VALUES ('1', 'oL7QE0TJ5zKxPK7rBmPmdsIPcR4A', '中国-北京市', '116.3537', '39.9405', '%F0%9F%99%88+%E6%B5%A3%E8%8A%B1%E6%B0%B4%E6%A6%AD', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKlEeib4YaCkwyicbKvscxD3LNZeicWlKUoWyC47JjdnSCU0lqu0xU5QR5lTHuh1pPQy6vicMNOrVCiaKw/0', '2', null, null, '0', null, null, null, null, '0', '0', '0', null, '123456789', '0', '2017-12-28 18:10:16', '0', '2017-12-25 11:32:28', null);
 INSERT INTO `user` VALUES ('17', 'oL7QE0f0zRL4I4FRgLRWSvrAMQ-o', '中国-河北省-唐山市', '118.192', '39.631', '%E4%BD%A0%E7%9C%8B%E8%B5%B7%E6%9D%A5%E5%BE%88%E5%A5%BD%E5%90%83%F0%9F%91%8F', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJ9W9Tt4l7nuc08BZUWzzYUIAXXOxonAN569FGvfMja9IRiap4LMqC04I04AibibbNYbajvZxUAgdicxw/0', '1', null, null, '0', null, null, null, null, '0', '0', '0', null, null, '0', '2017-12-26 11:25:01', '0', '2017-12-25 16:07:10', null);
 
 -- ----------------------------

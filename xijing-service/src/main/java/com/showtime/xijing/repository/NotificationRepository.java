@@ -1,7 +1,6 @@
 package com.showtime.xijing.repository;
 
 import com.showtime.xijing.entity.Notification;
-import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.entity.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -15,6 +14,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NotificationRepository extends PagingAndSortingRepository<Notification, Long> {
 
-    Notification findByUserAndRecruitInfo(User user, RecruitInfo recruitInfo);
+    Notification findByUserAndOtherId(User user, long otherId);
 
 }

@@ -53,7 +53,7 @@ public class NotificationController {
     public Result findRecruitInfo(Long[] reportIds) {
         List<Reports> reports = reportsService.findByIdIn(reportIds);
         for (Reports report : reports) {
-            Notification notification = notificationService.findByUserAndRecruitInfo(report.getUser(), report.getReportRecruitInfo());
+            Notification notification = notificationService.findByUserAndOtherId(report.getUser(), report.getReportRecruitInfo().getId());
             String url = WXRequestUtil.sendNotification(verifyCodeService.getWXAccessTokenCache());
             NotificationInfo notificationString = WXNotificationUtil.recruitPassNotificationParam(report, report.getUser().getOpenId(), notification.getNumber());
             HttpRequestUtil.httpRequest(url, "POST", new Gson().toJson(notificationString));
