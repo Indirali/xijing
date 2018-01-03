@@ -43,8 +43,8 @@ public class WXNotificationUtil {
             salary = "薪酬面议";
         NotificationInfoData fifth = new NotificationInfoData(salary, "#000000");
         NotificationInfoData sixth = new NotificationInfoData(reports.getUser().getNickname(), "#000000");
-        NotificationInfoData seventh = new NotificationInfoData(reports.getStatus() == 1 ? "未通过" : "已通过", "#000000");
-        NotificationInfoData eighth = new NotificationInfoData(reports.getStatus() == 1 ? Notification_Recruit_Fail : Notification_Recruit_Pass, "#000000");
+        NotificationInfoData seventh = new NotificationInfoData(reports.getStatus() == 1 ? "已通过" : "未通过", "#000000");
+        NotificationInfoData eighth = new NotificationInfoData(reports.getStatus() == 1 ? Notification_Recruit_Pass : Notification_Recruit_Fail, "#000000");
         notificationInfoData.put("first", first);
         notificationInfoData.put("second", second);
         notificationInfoData.put("thirdly", thirdly);

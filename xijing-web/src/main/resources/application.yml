@@ -15,3 +15,11 @@ spring:
         enabled: false
       user: admin
       password: admin
+
+logging:
+    file: logs/xijing.log
+    config: classpath:logback-spring.xml
+    level:
+   # org.springframework: DEBUG
+     org.hibernate: DEBUG
+     org.hibernate.type.descriptor.sql: TRACE

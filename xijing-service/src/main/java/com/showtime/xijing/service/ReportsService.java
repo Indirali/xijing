@@ -39,13 +39,8 @@ public class ReportsService {
         return reportsRepository.findOne(id);
     }
 
-    public List<Reports> findByIdIn(Long[] ids) {
-        return reportsRepository.findByIdIn(ids);
-    }
-
     public List<Reports> findByReportRecruitInfoAndStatus(RecruitInfo recruitInfo, int status) {
         return reportsRepository.findByReportRecruitInfoAndStatus(recruitInfo, status);
     }
-
 
 }

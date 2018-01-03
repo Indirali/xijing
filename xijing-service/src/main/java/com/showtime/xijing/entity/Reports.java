@@ -41,6 +41,8 @@ public class Reports extends BaseEntity<Long> {
 
     private Date reportTime;
 
+    private boolean notification;
+
     private int status;
 
 }
