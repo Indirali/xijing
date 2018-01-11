@@ -78,7 +78,6 @@ public class IdentityController {
             }
         } catch (Exception e) {
             log.debug(e.toString());
-            e.printStackTrace();
             return Result.fail("用户信息解析失败");
         }
         return Result.success().data("User", user).data("newUser", newUser);

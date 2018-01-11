@@ -3,8 +3,10 @@ package com.showtime.xijing.web.controller;
 import com.showtime.xijing.common.Result;
 import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.entity.Reports;
+import com.showtime.xijing.entity.User;
 import com.showtime.xijing.service.RecruitInfoService;
 import com.showtime.xijing.service.ReportsService;
+import com.showtime.xijing.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,18 +26,25 @@ import java.util.List;
 @RequestMapping(value = "/report")
 public class ReportsController {
 
+    private UserService userService;
     private ReportsService reportsService;
     private RecruitInfoService recruitInfoService;
 
     @Autowired
-    public ReportsController(ReportsService reportsService,
+    public ReportsController(UserService userService,
+                             ReportsService reportsService,
                              RecruitInfoService recruitInfoService) {
+        this.userService = userService;
         this.reportsService = reportsService;
         this.recruitInfoService = recruitInfoService;
     }
 
     @RequestMapping(value = "/report", method = RequestMethod.POST)
     public Result reportRecruit(Reports reports) {
+        User user = userService.findOne(reports.getUser().getId());
+        if (user.getPhoneNumber() == null || user.getWxNumber() == null || user.getWxImage() == 0) {
+            return Result.noInformation();
+        }
         reportsService.save(reports);
         return Result.success();
     }

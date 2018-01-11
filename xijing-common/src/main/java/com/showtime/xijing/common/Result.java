@@ -13,6 +13,7 @@ public class Result<T extends Object> {
     public static Code code_fail = new Code(400);
     private static Code code_noAuth = new Code(401);
     private static Code code_noPermission = new Code(402);
+    private static Code code_information = new Code(403);
 
     public static Result<? extends Object> success(Object data) {
         return new Result<>(code_success, data);
@@ -32,6 +33,10 @@ public class Result<T extends Object> {
 
     public static Result<?> noPermission() {
         return new Result<>(code_noPermission, null, "请授权或登录账号");
+    }
+
+    public static Result<?> noInformation() {
+        return new Result<>(code_information, null, "请添加联系方式，方便通知结果");
     }
 
     /**

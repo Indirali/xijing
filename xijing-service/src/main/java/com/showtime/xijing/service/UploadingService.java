@@ -27,11 +27,8 @@ import static com.showtime.xijing.enums.UploadType.Video;
 @Service
 public class UploadingService {
 
-    /**
-     * 默认上传空间
-     */
+    //默认上传空间
     private final static String BUCKET_NAME = "xijing";
-
     private UserFileRepository userFileRepository;
 
     @Autowired
@@ -40,7 +37,12 @@ public class UploadingService {
     }
 
     /**
-     * @param mf 图片流
+     * 图片上传
+     *
+     * @param mf   图片流
+     * @param type 类型
+     * @return
+     * @throws IOException io异常
      */
     public UserFile uploadingImage(MultipartFile mf, boolean type) throws IOException {
         papers(mf, type);
@@ -57,20 +59,19 @@ public class UploadingService {
         return userFileRepository.save(file);
     }
 
-
     /**
      * 对上传的文件大小进行判断
      *
      * @param file 图片流
+     * @param type 类型
      */
-
     private void papers(MultipartFile file, boolean type) {
         Assert.notNull(file, "文件为空");
         log.info("上传文件大小是：" + file.getSize());
         if (type) {
-            Assert.isTrue(file.getSize() < 10 * 1024 * 1024, "图片大小超过10M!");
+            Assert.isTrue(file.getSize() < 5 * 1024 * 1024, "图片大小超过5M!");
         } else {
-            Assert.isTrue(file.getSize() < 30 * 1024 * 1024, "视频大小超过30M!");
+            Assert.isTrue(file.getSize() < 20 * 1024 * 1024, "视频大小超过20M!");
         }
         List<String> fileTypes = new ArrayList<>();
         if (type) {

@@ -10,3 +10,4 @@ logging:
 #     org.springframework: DEBUG
      org.hibernate: DEBUG
      org.hibernate.type.descriptor.sql: TRACE
+     com.showtime.xijing.web.controller: debug
