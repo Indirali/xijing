@@ -13,7 +13,6 @@ import com.showtime.xijing.web.vo.RecruitVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +41,13 @@ public class RecruitController {
         this.recruitInfoService = recruitInfoService;
     }
 
+    /**
+     * 获取全部招聘信息
+     *
+     * @param pageable
+     * @param recruitCondition
+     * @return
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public Result findRecruitInfo(Pageable pageable,
                                   RecruitCondition recruitCondition) {
@@ -57,7 +63,6 @@ public class RecruitController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result saveRecruit(RecruitVo recruitVo, String openId) {
         User user = userService.findByOpenId(openId);
-        Assert.notNull(user, "用户不存在！");
         if (user.getAuthStatus() == 0) {
             return Result.noAuth();
         }

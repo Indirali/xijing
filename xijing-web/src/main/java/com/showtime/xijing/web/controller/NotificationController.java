@@ -31,18 +31,36 @@ public class NotificationController {
         this.notificationService = notificationService;
     }
 
+    /**
+     * 保存通知信息
+     *
+     * @param notification
+     * @return
+     */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result saveNotification(Notification notification) {
         notificationService.save(notification);
         return Result.success();
     }
 
+    /**
+     * 招聘喜欢的通知
+     *
+     * @param reportIds
+     * @return
+     */
     @RequestMapping(value = "/recruitLike", method = RequestMethod.POST)
     public Result sendRecruitLike(Long[] reportIds) {
         activeMQService.recruitInfoPush(reportIds);
         return Result.success();
     }
 
+    /**
+     * 结束招聘发送通知
+     *
+     * @param recruitInfoId
+     * @return
+     */
     @RequestMapping(value = "/recruitAll", method = RequestMethod.POST)
     public Result sendRecruitAll(long recruitInfoId) {
         activeMQService.recruitInfoAllPush(recruitInfoId);

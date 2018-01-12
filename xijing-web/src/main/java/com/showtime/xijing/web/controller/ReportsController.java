@@ -52,19 +52,21 @@ public class ReportsController {
     @RequestMapping(value = "/cancel", method = RequestMethod.GET)
     public Result cancelReport(long reportId) {
         Reports reports = reportsService.findById(reportId);
-        reports.setStatus(1);
+        reports.setStatus(3);
         return Result.success();
     }
 
     @RequestMapping(value = "/like", method = RequestMethod.GET)
-    public Result likeReportUser(Reports reports) {
+    public Result likeReportUser(long reportId) {
+        Reports reports = reportsService.findById(reportId);
         reports.setStatus(1);
         reportsService.save(reports);
         return Result.success();
     }
 
     @RequestMapping(value = "/dislike", method = RequestMethod.GET)
-    public Result dislikeReportUser(Reports reports) {
+    public Result dislikeReportUser(long reportId) {
+        Reports reports = reportsService.findById(reportId);
         reports.setStatus(2);
         reportsService.save(reports);
         return Result.success();
@@ -73,13 +75,16 @@ public class ReportsController {
     @RequestMapping(value = "/filtrate", method = RequestMethod.GET)
     public Result filtrateReportUser(long recruitInfoId) {
         RecruitInfo recruitInfo = recruitInfoService.findOne(recruitInfoId);
-        List<Reports> nuDoReports = reportsService.findByReportRecruitInfoAndStatus(recruitInfo, 0);
+        List<Reports> unDoReports = reportsService.findByReportRecruitInfoAndStatus(recruitInfo, 0);
         List<Reports> likeReports = reportsService.findByReportRecruitInfoAndStatus(recruitInfo, 1);
         List<Reports> dislikeReports = reportsService.findByReportRecruitInfoAndStatus(recruitInfo, 2);
         return Result.success()
-                .data("nuDo", nuDoReports)
+                .data("unDo", unDoReports)
+                .data("unDoCount", unDoReports.size())
                 .data("like", likeReports)
-                .data("dislike", dislikeReports);
+                .data("likeCount", likeReports.size())
+                .data("dislike", dislikeReports)
+                .data("dislikeCount", dislikeReports.size());
     }
 
 }

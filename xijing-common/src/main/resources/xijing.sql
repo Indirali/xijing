@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2018-01-02 15:25:24
+Date: 2018-01-12 15:24:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,17 +22,18 @@ DROP TABLE IF EXISTS `confirm`;
 CREATE TABLE `confirm` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(32) DEFAULT NULL COMMENT '用户id',
-  `recruit_id` bigint(32) DEFAULT NULL COMMENT '确认招聘ID',
+  `recruit_id` bigint(32) NOT NULL COMMENT '确认招聘ID',
   `recruit_info_id` bigint(32) DEFAULT NULL COMMENT '确认招聘详情ID',
-  `status` tinyint(4) DEFAULT '0' COMMENT '状态',
+  `status` tinyint(4) DEFAULT '0' COMMENT '状态 0 正常 1 已发送通知',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of confirm
 -- ----------------------------
+INSERT INTO `confirm` VALUES ('1', '1', '1', '1', '1', '2018-01-03 16:15:27', null);
 
 -- ----------------------------
 -- Table structure for follows
@@ -169,7 +170,8 @@ CREATE TABLE `reports` (
   `report_recruit_id` bigint(32) NOT NULL COMMENT '报名招聘ID',
   `report_recruit_info_id` bigint(32) NOT NULL,
   `report_time` datetime NOT NULL COMMENT '报名时间',
-  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态',
+  `notification` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否通知 0 false   1 true',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态0 未筛选 1 喜欢  2 不喜欢',
   `create_time` datetime NOT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -178,7 +180,9 @@ CREATE TABLE `reports` (
 -- ----------------------------
 -- Records of reports
 -- ----------------------------
-INSERT INTO `reports` VALUES ('1', '1', '0', 'Person', '', '1', '1', '2017-12-28 10:54:45', '0', '2017-12-28 10:54:47', null);
+INSERT INTO `reports` VALUES ('1', '1', '0', 'Person', '', '1', '1', '2017-12-28 10:54:45', '0', '0', '2017-12-28 10:54:47', null);
+INSERT INTO `reports` VALUES ('2', '17', '0', 'Person', '', '1', '1', '2018-01-12 12:22:23', '0', '1', '2018-01-12 12:22:27', null);
+INSERT INTO `reports` VALUES ('3', '18', '0', 'Person', '', '1', '1', '2018-01-12 12:22:57', '0', '2', '2018-01-12 12:23:02', null);
 
 -- ----------------------------
 -- Table structure for tip
@@ -206,8 +210,8 @@ CREATE TABLE `user` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `open_id` varchar(64) NOT NULL COMMENT '微信唯一值',
   `place` varchar(32) DEFAULT NULL COMMENT '所在地点',
-  `longitude` varchar(8) DEFAULT NULL,
-  `latitude` varchar(8) DEFAULT NULL,
+  `longitude` varchar(12) DEFAULT NULL,
+  `latitude` varchar(12) DEFAULT NULL,
   `nickname` varchar(128) NOT NULL COMMENT '昵称',
   `head_portrait` varchar(128) NOT NULL COMMENT '头像',
   `sex` tinyint(1) NOT NULL COMMENT '性别 ',
@@ -231,13 +235,14 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   KEY `openid` (`open_id`) USING BTREE,
   KEY `id` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'oL7QE0TJ5zKxPK7rBmPmdsIPcR4A', '中国-北京市', '116.3537', '39.9405', '%F0%9F%99%88+%E6%B5%A3%E8%8A%B1%E6%B0%B4%E6%A6%AD', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKlEeib4YaCkwyicbKvscxD3LNZeicWlKUoWyC47JjdnSCU0lqu0xU5QR5lTHuh1pPQy6vicMNOrVCiaKw/0', '2', null, null, '0', null, null, null, null, '0', '0', '0', null, '123456789', '0', '2017-12-28 18:10:16', '0', '2017-12-25 11:32:28', null);
-INSERT INTO `user` VALUES ('17', 'oL7QE0f0zRL4I4FRgLRWSvrAMQ-o', '中国-河北省-唐山市', '118.192', '39.631', '%E4%BD%A0%E7%9C%8B%E8%B5%B7%E6%9D%A5%E5%BE%88%E5%A5%BD%E5%90%83%F0%9F%91%8F', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJ9W9Tt4l7nuc08BZUWzzYUIAXXOxonAN569FGvfMja9IRiap4LMqC04I04AibibbNYbajvZxUAgdicxw/0', '1', null, null, '0', null, null, null, null, '0', '0', '0', null, null, '0', '2017-12-26 11:25:01', '0', '2017-12-25 16:07:10', null);
+INSERT INTO `user` VALUES ('1', 'oL7QE0TJ5zKxPK7rBmPmdsIPcR4A', '中国-北京市', '116.354', '39.9406', '%F0%9F%99%88+%E6%B5%A3%E8%8A%B1%E6%B0%B4%E6%A6%AD', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKlEeib4YaCkwyicbKvscxD3LNZeicWlKUoWyC47JjdnSCU0lqu0xU5QR5lTHuh1pPQy6vicMNOrVCiaKw/0', '2', null, null, '0', null, null, null, null, '0', '0', '0', null, '123456789', '0', '2018-01-05 12:13:01', '0', '2017-12-25 11:32:28', null);
+INSERT INTO `user` VALUES ('17', 'oL7QE0f0zRL4I4FRgLRWSvrAMQ-o', '中国-北京市', '116.36611', '39.91231', '%E4%BD%A0%E7%9C%8B%E8%B5%B7%E6%9D%A5%E5%BE%88%E5%A5%BD%E5%90%83%F0%9F%91%8F', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJ9W9Tt4l7nuc08BZUWzzYUIAXXOxonAN569FGvfMja9IRiap4LMqC04I04AibibbNYbajvZxUAgdicxw/0', '1', null, null, '0', null, null, null, null, '0', '0', '0', null, null, '0', '2018-01-12 10:48:31', '0', '2017-12-25 16:07:10', null);
+INSERT INTO `user` VALUES ('18', 'oL7QE0aHoTD0s2C79VcW58w2GixI', '中国-辽宁省-沈阳市', '123.45852', '41.79607', '%E6%B2%A1%E6%9C%89%E5%90%8D%E5%AD%97', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLfiboSpB2P298ImZPvDvmenbXA88ibhuYCLTVdyT57JftJI6UibYHhYY0CibzWCvkHCvJuaX4u2FerNA/0', '2', null, null, '0', null, null, null, null, '0', '0', '0', null, null, '0', '2018-01-11 17:21:47', '0', '2018-01-11 11:29:06', null);
 
 -- ----------------------------
 -- Table structure for user_file

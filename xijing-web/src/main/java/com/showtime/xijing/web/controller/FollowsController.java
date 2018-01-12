@@ -8,7 +8,6 @@ import com.showtime.xijing.service.RecruitService;
 import com.showtime.xijing.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,10 +55,8 @@ public class FollowsController {
         return Result.success();
     }
 
-
     @RequestMapping(value = "/follow", method = RequestMethod.POST)
-    public Result followUser(String openId, Follows follows) {
-        Assert.notNull(userService.findByOpenId(openId), "用户不存在");
+    public Result followUser(Follows follows) {
         followsService.save(follows);
         return Result.success();
     }

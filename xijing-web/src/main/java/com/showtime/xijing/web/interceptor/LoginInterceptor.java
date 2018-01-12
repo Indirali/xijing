@@ -4,6 +4,7 @@ import com.showtime.xijing.entity.User;
 import com.showtime.xijing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +26,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         String openId = request.getParameter("openId");
         User user = userService.findByOpenId(openId);
         if (user == null) {
+            Assert.notNull(user, "用户不存在,如有问题请在公众号【戏鲸汇演】留言!");
+            return false;
+        }
+        if (user.getCreditDegree() <= 300) {
+            Assert.notNull(user, "用户信用值过低,不能进行任何操作,如有问题请在公众号【戏鲸汇演】留言!");
             return false;
         }
         return true;
@@ -32,12 +38,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-
     }
 
 }

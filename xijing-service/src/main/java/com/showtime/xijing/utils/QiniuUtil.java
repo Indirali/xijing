@@ -24,16 +24,13 @@ import java.util.List;
  */
 public class QiniuUtil {
 
-    private final static String ACCESS_KEY = "LuTPUHSJ8av5eC-ioHWy0GZ-qmtc0n3swMX-XgpM";
-    private final static String SECRET_KEY = "R42FCMC99_OMQ_ybqT1d7pE0fI7FhvkWHEvQPM9z";
-
+    private static final String ACCESS_KEY = "LuTPUHSJ8av5eC-ioHWy0GZ-qmtc0n3swMX-XgpM";
+    private static final String SECRET_KEY = "R42FCMC99_OMQ_ybqT1d7pE0fI7FhvkWHEvQPM9z";
     /**
      * 空间默认域名
      */
     private static final String BUCKET_HOST_NAME = "http://p1cih3dw5.bkt.clouddn.com";
-
     private static UploadManager uploadManager = new UploadManager();
-
     private static int LIMIT_SIZE = 1000;
 
     /**
@@ -101,7 +98,6 @@ public class QiniuUtil {
         return response.bodyString();
     }
 
-
     /**
      * @param filePath   待上传文件的硬盘路径
      * @param fileName   待上传文件的文件名
@@ -135,7 +131,6 @@ public class QiniuUtil {
         is.close();
         return response.bodyString();
     }
-
 
     /**
      * @param url        网络上一个资源文件的URL
@@ -180,7 +175,6 @@ public class QiniuUtil {
         bucketManager.copy(bucket, key, targetBucket, targetKey);
     }
 
-
     /**
      * @param bucket       源空间名称
      * @param key          源空间里文件的key(唯一的)
@@ -220,7 +214,6 @@ public class QiniuUtil {
         bucketManager.delete(bucket, key);
     }
 
-
     /**
      * @param bucketName 空间名称
      * @param prefix     文件key的前缀
@@ -239,7 +232,6 @@ public class QiniuUtil {
         return listing.items;
     }
 
-
     /**
      * @param bucketName 空间名称
      * @param prefix     文件key的前缀
@@ -256,7 +248,6 @@ public class QiniuUtil {
         return listing.items;
     }
 
-
     /**
      * @param bucketName
      * @return FileInfo[]
@@ -271,7 +262,6 @@ public class QiniuUtil {
         }
         return listing.items;
     }
-
 
     /**
      * @param bucketName
@@ -290,7 +280,6 @@ public class QiniuUtil {
         }
         return (listing.items)[0];
     }
-
 
     /**
      * @param bucketName

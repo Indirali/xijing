@@ -1,10 +1,11 @@
 package com.showtime.xijing.utils;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.*;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Http请求工具类
@@ -13,8 +14,9 @@ import java.util.Map;
  * @version v1.0.1
  * @since 2014-8-24 13:30:56
  */
+@Slf4j
 public class HttpRequestUtil {
-    static boolean proxySet = false;
+
     static String proxyHost = "127.0.0.1";
     static int proxyPort = 8087;
 
@@ -25,64 +27,55 @@ public class HttpRequestUtil {
      * @return
      */
     public static String urlEncode(String source, String encode) {
-        String result = source;
         try {
-            result = java.net.URLEncoder.encode(source, encode);
+            source = java.net.URLEncoder.encode(source, encode);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            log.debug(ExceptionUtils.getStackTrace(e));
             return "0";
         }
-        return result;
+        return source;
     }
 
     public static String urlEncodeGBK(String source) {
-        String result = source;
         try {
-            result = java.net.URLEncoder.encode(source, "GBK");
+            source = java.net.URLEncoder.encode(source, "GBK");
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            log.debug(ExceptionUtils.getStackTrace(e));
             return "0";
         }
-        return result;
+        return source;
     }
 
     /**
      * 发起http请求获取返回结果
      *
-     * @param req_url 请求地址
+     * @param reqUrl 请求地址
      * @return
      */
-    public static String httpRequest(String req_url) {
+    public static String httpRequest(String reqUrl) {
         StringBuffer buffer = new StringBuffer();
         try {
-            URL url = new URL(req_url);
+            URL url = new URL(reqUrl);
             HttpURLConnection httpUrlConn = (HttpURLConnection) url.openConnection();
-
             httpUrlConn.setDoOutput(false);
             httpUrlConn.setDoInput(true);
             httpUrlConn.setUseCaches(false);
-
             httpUrlConn.setRequestMethod("GET");
             httpUrlConn.connect();
-
             // 将返回的输入流转换成字符串
             InputStream inputStream = httpUrlConn.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-            String str = null;
+            String str;
             while ((str = bufferedReader.readLine()) != null) {
                 buffer.append(str);
             }
             bufferedReader.close();
-            inputStreamReader.close();
-            // 释放资源
+            inputStreamReader.close(); // 释放资源
             inputStream.close();
-            inputStream = null;
             httpUrlConn.disconnect();
-
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());
+            log.debug(ExceptionUtils.getStackTrace(e));
         }
         return buffer.toString();
     }
@@ -104,7 +97,7 @@ public class HttpRequestUtil {
             // 获得返回的输入流
             inputStream = httpUrlConn.getInputStream();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.debug(ExceptionUtils.getStackTrace(e));
         }
         return inputStream;
     }
@@ -128,16 +121,9 @@ public class HttpRequestUtil {
             // 设置通用的请求属性
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
-            connection.setRequestProperty("user-agent",
-                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             // 建立实际的连接
             connection.connect();
-            // 获取所有响应头字段
-            Map<String, List<String>> map = connection.getHeaderFields();
-            // 遍历所有的响应头字段
-            for (String key : map.keySet()) {
-                System.out.println(key + "--->" + map.get(key));
-            }
             // 定义 BufferedReader输入流来读取URL的响应
             in = new BufferedReader(new InputStreamReader(
                     connection.getInputStream()));
@@ -147,7 +133,7 @@ public class HttpRequestUtil {
             }
         } catch (Exception e) {
             System.out.println("发送GET请求出现异常！" + e);
-            e.printStackTrace();
+            log.debug(ExceptionUtils.getStackTrace(e));
         }
         // 使用finally块来关闭输入流
         finally {
@@ -155,8 +141,8 @@ public class HttpRequestUtil {
                 if (in != null) {
                     in.close();
                 }
-            } catch (Exception e2) {
-                e2.printStackTrace();
+            } catch (Exception e) {
+                log.debug(ExceptionUtils.getStackTrace(e));
             }
         }
         return result;
@@ -176,7 +162,7 @@ public class HttpRequestUtil {
         String result = "";
         try {
             URL realUrl = new URL(url);
-            HttpURLConnection conn = null;
+            HttpURLConnection conn;
             if (isproxy) {//使用代理模式
                 @SuppressWarnings("static-access")
                 Proxy proxy = new Proxy(Proxy.Type.DIRECT.HTTP, new InetSocketAddress(proxyHost, proxyPort));
@@ -185,23 +171,17 @@ public class HttpRequestUtil {
                 conn = (HttpURLConnection) realUrl.openConnection();
             }
             // 打开和URL之间的连接
-
             // 发送POST请求必须设置如下两行
             conn.setDoOutput(true);
             conn.setDoInput(true);
             conn.setRequestMethod("POST");    // POST方法
-
-
             // 设置通用的请求属性
-
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
             conn.setRequestProperty("user-agent",
                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
             conn.connect();
-
             // 获取URLConnection对象对应的输出流
             out = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
             // 发送请求参数
@@ -209,15 +189,14 @@ public class HttpRequestUtil {
             // flush输出流的缓冲
             out.flush();
             // 定义BufferedReader输入流来读取URL的响应
-            in = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()));
+            in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line;
             while ((line = in.readLine()) != null) {
                 result += line;
             }
         } catch (Exception e) {
             System.out.println("发送 POST 请求出现异常！" + e);
-            e.printStackTrace();
+            log.debug(ExceptionUtils.getStackTrace(e));
         }
         //使用finally块来关闭输出流、输入流
         finally {
@@ -233,15 +212,6 @@ public class HttpRequestUtil {
             }
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        //demo:代理访问
-        String url = "http://api.adf.ly/api.php";
-        String para = "key=youkeyid&youuid=uid&advert_type=int&domain=adf.ly&url=http://somewebsite.com";
-
-        String sr = HttpRequestUtil.sendPost(url, para, true);
-        System.out.println(sr);
     }
 
     public static void httpRequest(String requestUrl, String requestMethod, String outputStr) {

@@ -43,6 +43,7 @@ public class Reports extends BaseEntity<Long> {
 
     private boolean notification;
 
+    // 状态 0 正常 1 喜欢 2 不喜欢 3 取消报名
     private int status;
 
 }
