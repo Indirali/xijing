@@ -2,6 +2,7 @@ package com.showtime.xijing.service;
 
 import com.showtime.xijing.entity.Recruit;
 import com.showtime.xijing.entity.RecruitCondition;
+import com.showtime.xijing.entity.User;
 import com.showtime.xijing.repository.RecruitRepository;
 import com.showtime.xijing.repository.ReportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +56,8 @@ public class RecruitService {
         return recruitRepository.findOne(id);
     }
 
-    public List<Recruit> findByUser(Long userId) {
-        return recruitRepository.findByUser(userId);
+    public List<Recruit> findByUserList(List<User> users) {
+        return recruitRepository.findByUserIn(users);
     }
 
     public Recruit save(Recruit recruit) {

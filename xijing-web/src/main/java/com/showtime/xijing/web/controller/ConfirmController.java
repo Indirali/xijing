@@ -1,10 +1,12 @@
 package com.showtime.xijing.web.controller;
 
 import com.showtime.xijing.common.Result;
+import com.showtime.xijing.common.utils.DateUtil;
 import com.showtime.xijing.entity.Confirm;
+import com.showtime.xijing.entity.Recruit;
 import com.showtime.xijing.entity.User;
 import com.showtime.xijing.service.ConfirmService;
-import com.showtime.xijing.service.ReportsService;
+import com.showtime.xijing.service.RecruitService;
 import com.showtime.xijing.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +29,24 @@ import java.util.Date;
 public class ConfirmController {
 
     private UserService userService;
+    private RecruitService recruitService;
     private ConfirmService confirmService;
 
     @Autowired
     public ConfirmController(UserService userService,
+                             RecruitService recruitService,
                              ConfirmService confirmService) {
         this.userService = userService;
+        this.recruitService = recruitService;
         this.confirmService = confirmService;
     }
 
     @RequestMapping(value = "/userConfirm", method = RequestMethod.GET)
-    public Result userConfirm(Confirm confirm, Date date) {
+    public Result userConfirm(Confirm confirm) {
         User user = userService.findOne(confirm.getUser().getId());
-        Assert.notNull(confirmService.findByUserAndCreateTime(user, date), "当天已有行程，不能再进行确认");
+        Recruit recruit = recruitService.findById(confirm.getRecruit().getId());
+        Date date = recruit.getParticipationTime();
+        Assert.notNull(confirmService.findByUserAndCreateTimeBetween(user, DateUtil.StartTime(date), DateUtil.EndTime(date)), "当天已有行程，不能再进行确认");
         confirmService.save(confirm);
         return Result.success();
     }

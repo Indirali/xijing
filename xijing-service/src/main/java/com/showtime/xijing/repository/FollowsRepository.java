@@ -16,6 +16,6 @@ import java.util.List;
 @Repository
 public interface FollowsRepository extends PagingAndSortingRepository<Follows, Long> {
 
-    List<Follows> findAllByUser(User user);
+    List<Follows> findAllByUserAndStatus(User user, int Status);
 
 }

@@ -3,6 +3,7 @@ package com.showtime.xijing.web.controller;
 import com.showtime.xijing.common.Result;
 import com.showtime.xijing.entity.Follows;
 import com.showtime.xijing.entity.Recruit;
+import com.showtime.xijing.entity.User;
 import com.showtime.xijing.service.FollowsService;
 import com.showtime.xijing.service.RecruitService;
 import com.showtime.xijing.service.UserService;
@@ -39,20 +40,21 @@ public class FollowsController {
         this.followsService = followsService;
     }
 
-    @RequestMapping(value = "/allUser", method = RequestMethod.POST)
-    public Result allFollowUser(long id) {
-        followsService.findAllByUser(userService.findOne(id));
-        return Result.success();
+    @RequestMapping(value = "/allUser", method = RequestMethod.GET)
+    public Result allFollowUser(String openId) {
+        List<Follows> follows = followsService.findAllByUser(userService.findByOpenId(openId));
+        return Result.success(follows);
     }
 
-    @RequestMapping(value = "/allRecruits", method = RequestMethod.POST)
-    public Result allFollowRecruit(long id) {
-        List<Follows> follows = followsService.findAllByUser(userService.findOne(id));
-        List<Recruit> recruits = new ArrayList<>();
+    @RequestMapping(value = "/allRecruits", method = RequestMethod.GET)
+    public Result allFollowRecruit(String openId) {
+        List<Follows> follows = followsService.findAllByUser(userService.findByOpenId(openId));
+        List<User> users = new ArrayList<>();
         for (Follows follow : follows) {
-            recruits.addAll(recruitService.findByUser(follow.getFollowUser().getId()));
+            users.add(follow.getFollowUser());
         }
-        return Result.success();
+        List<Recruit> recruits = recruitService.findByUserList(users);
+        return Result.success(recruits);
     }
 
     @RequestMapping(value = "/follow", method = RequestMethod.POST)

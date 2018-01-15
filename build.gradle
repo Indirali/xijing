@@ -11,7 +11,6 @@ buildscript {
 
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE"
-
         // 以下为swagger转换 asciidoc 插件
         classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
         // swagger2markup 插件
@@ -28,7 +27,6 @@ allprojects {
     apply plugin: 'idea'
     apply plugin: 'groovy'
     apply plugin: 'maven'
-
     //swagger to doc
     apply plugin: 'org.asciidoctor.convert'
     apply plugin: 'io.github.swagger2markup'
@@ -64,7 +62,6 @@ subprojects {
         compile libraries.'joda-time'
         compile libraries.'lombok'
         compile libraries.'gson'
-
         // 为每个项目加载 Spring 开发热部署插件
         // 在打包时将会被自动排除
         compile libraries.'spring-boot-devtools'

@@ -26,7 +26,7 @@ public class FollowsService {
     }
 
     public List<Follows> findAllByUser(User user) {
-        return followsRepository.findAllByUser(user);
+        return followsRepository.findAllByUserAndStatus(user, 0);
     }
 
     public void deleteFollow(long id) {

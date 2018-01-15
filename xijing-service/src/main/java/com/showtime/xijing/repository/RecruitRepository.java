@@ -1,6 +1,7 @@
 package com.showtime.xijing.repository;
 
 import com.showtime.xijing.entity.Recruit;
+import com.showtime.xijing.entity.User;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,6 @@ import java.util.List;
 @Repository
 public interface RecruitRepository extends PagingAndSortingRepository<Recruit, Long>, JpaSpecificationExecutor<Recruit> {
 
-    List<Recruit> findByUser(Long userId);
+    List<Recruit> findByUserIn(List<User> users);
 
 }
