@@ -29,11 +29,8 @@ public class ReportsService {
 
     @CachePut(value = {"findReportById", "findByReportRecruitInfoAndStatus"})
     public Reports save(Reports reports) {
-        if (reports.getId() != null) {
-            reports.setUpdateTime(new Date());
-        } else {
+        if (reports.getId() == null) {
             reports.setReportTime(new Date());
-            reports.setCreateTime(new Date());
         }
         return reportsRepository.save(reports);
     }

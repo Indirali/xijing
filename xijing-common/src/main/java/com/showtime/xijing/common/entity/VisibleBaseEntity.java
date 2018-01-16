@@ -1,6 +1,7 @@
 package com.showtime.xijing.common.entity;
 
-import javax.persistence.*;
+import javax.persistence.EntityListeners;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 /**

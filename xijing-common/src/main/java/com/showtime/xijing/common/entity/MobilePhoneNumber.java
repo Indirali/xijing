@@ -1,8 +1,11 @@
 package com.showtime.xijing.common.entity;
 
 public class MobilePhoneNumber extends PhoneNumber {
+    public MobilePhoneNumber() {
+    }
 
-    public MobilePhoneNumber(String numberToParse) throws InvalidNumberException {
+    public MobilePhoneNumber(String numberToParse)
+            throws InvalidNumberException {
         super(numberToParse);
         if (!isMobile()) {
             throw new InvalidNumberException("not a mobile phone number");
@@ -16,4 +19,8 @@ public class MobilePhoneNumber extends PhoneNumber {
         }
     }
 
+    @Deprecated
+    private boolean isPublicNumber() {
+        return getCountryCode() == 86 && getNationalNumber() == 13800138000L;
+    }
 }

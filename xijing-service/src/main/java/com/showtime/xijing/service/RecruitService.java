@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -67,11 +66,6 @@ public class RecruitService {
 
     @CachePut(value = {"findRecruitById", "findRecruitByUserList", "findAllRecruit"})
     public Recruit save(Recruit recruit) {
-        if (recruit.getId() != null) {
-            recruit.setUpdateTime(new Date());
-        } else {
-            recruit.setCreateTime(new Date());
-        }
         return recruitRepository.save(recruit);
     }
 

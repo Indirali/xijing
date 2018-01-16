@@ -16,8 +16,6 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-
 /**
  * Create with IntelliJ IDEA
  * User: Indira
@@ -58,20 +56,13 @@ public class UserService {
 
     @CachePut(value = {"findAllUser", "findUserById", "findByOpenId"})
     public User save(User user) {
-        if (user.getId() != null) {
-            user.setUpdateTime(new Date());
-        } else {
-            user.setCreateTime(new Date());
-        }
         return userRepository.save(user);
     }
 
     @Transactional
     @CachePut(value = {"findAllUser", "findUserById", "findByOpenId"})
     public void updateUserInfo(User user, UserInfo userInfo) {
-        userInfo.setCreateTime(new Date());
         UserInfo info = userInfoRepository.save(userInfo);
-        user.setCreateTime(new Date());
         user.setUserInfo(info);
         userRepository.save(user);
     }

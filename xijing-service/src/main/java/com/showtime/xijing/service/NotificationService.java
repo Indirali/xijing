@@ -6,8 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 /**
  * Create with IntelliJ IDEA
  * User: Indira
@@ -26,11 +24,6 @@ public class NotificationService {
     }
 
     public Notification save(Notification notification) {
-        if (notification.getId() != null) {
-            notification.setUpdateTime(new Date());
-        } else {
-            notification.setCreateTime(new Date());
-        }
         return notificationRepository.save(notification);
     }
 

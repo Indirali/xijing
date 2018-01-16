@@ -26,11 +26,6 @@ public class ConfirmService {
     }
 
     public Confirm save(Confirm confirm) {
-        if (confirm.getId() != null) {
-            confirm.setUpdateTime(new Date());
-        } else {
-            confirm.setCreateTime(new Date());
-        }
         return confirmRepository.save(confirm);
     }
 

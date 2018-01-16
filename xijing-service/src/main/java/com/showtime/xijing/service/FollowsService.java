@@ -6,7 +6,6 @@ import com.showtime.xijing.repository.FollowsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,11 +33,6 @@ public class FollowsService {
     }
 
     public Follows save(Follows follows) {
-        if (follows.getId() != null) {
-            follows.setUpdateTime(new Date());
-        } else {
-            follows.setCreateTime(new Date());
-        }
         return followsRepository.save(follows);
     }
 

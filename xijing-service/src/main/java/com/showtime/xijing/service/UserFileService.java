@@ -5,8 +5,6 @@ import com.showtime.xijing.repository.UserFileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 /**
  * Create with IntelliJ IDEA
  * User: Indira
@@ -24,11 +22,6 @@ public class UserFileService {
     }
 
     public UserFile save(UserFile userFile) {
-        if (userFile.getId() != null) {
-            userFile.setUpdateTime(new Date());
-        } else {
-            userFile.setCreateTime(new Date());
-        }
         return userFileRepository.save(userFile);
     }
 }

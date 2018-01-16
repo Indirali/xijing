@@ -5,7 +5,6 @@ import com.showtime.xijing.repository.RecruitInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,11 +32,6 @@ public class RecruitInfoService {
     }
 
     public RecruitInfo save(RecruitInfo recruitInfo) {
-        if (recruitInfo.getId() != null) {
-            recruitInfo.setUpdateTime(new Date());
-        } else {
-            recruitInfo.setCreateTime(new Date());
-        }
         return recruitInfoRepository.save(recruitInfo);
     }
 
