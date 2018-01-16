@@ -53,7 +53,7 @@ public class FollowsController {
         for (Follows follow : follows) {
             users.add(follow.getFollowUser());
         }
-        List<Recruit> recruits = recruitService.findByUserList(users);
+        List<Recruit> recruits = recruitService.findRecruitByUserList(users);
         return Result.success(recruits);
     }
 

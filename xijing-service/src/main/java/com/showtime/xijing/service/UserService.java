@@ -8,6 +8,8 @@ import com.showtime.xijing.repository.UserRepository;
 import com.showtime.xijing.utils.WXRequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jms.annotation.JmsListener;
@@ -39,18 +41,22 @@ public class UserService {
         this.userInfoRepository = userInfoRepository;
     }
 
-    public User findOne(long id) {
+    @Cacheable(value = "findUserById")
+    public User findUserById(long id) {
         return userRepository.findOne(id);
     }
 
+    @Cacheable(value = "findByOpenId")
     public User findByOpenId(String openId) {
         return userRepository.findByOpenId(openId);
     }
 
-    public Page<User> findAll(Pageable pageable) {
+    @Cacheable(value = "findAllUser")
+    public Page<User> findAllUser(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
+    @CachePut(value = {"findAllUser", "findUserById", "findByOpenId"})
     public User save(User user) {
         if (user.getId() != null) {
             user.setUpdateTime(new Date());
@@ -61,6 +67,7 @@ public class UserService {
     }
 
     @Transactional
+    @CachePut(value = {"findAllUser", "findUserById", "findByOpenId"})
     public void updateUserInfo(User user, UserInfo userInfo) {
         userInfo.setCreateTime(new Date());
         UserInfo info = userInfoRepository.save(userInfo);

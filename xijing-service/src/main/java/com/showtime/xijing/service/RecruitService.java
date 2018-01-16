@@ -6,6 +6,8 @@ import com.showtime.xijing.entity.User;
 import com.showtime.xijing.repository.RecruitRepository;
 import com.showtime.xijing.repository.ReportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,7 @@ public class RecruitService {
         this.recruitRepository = recruitRepository;
     }
 
+    @Cacheable(value = "findAllRecruit")
     public Page<Recruit> findAll(RecruitCondition recruitCondition, Pageable pageable) {
         Page<Recruit> recruits = recruitRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
@@ -52,14 +55,17 @@ public class RecruitService {
         return recruits;
     }
 
-    public Recruit findById(long id) {
+    @Cacheable(value = "findRecruitById")
+    public Recruit findRecruitById(long id) {
         return recruitRepository.findOne(id);
     }
 
-    public List<Recruit> findByUserList(List<User> users) {
+    @Cacheable(value = "findRecruitByUserList")
+    public List<Recruit> findRecruitByUserList(List<User> users) {
         return recruitRepository.findByUserIn(users);
     }
 
+    @CachePut(value = {"findRecruitById", "findRecruitByUserList", "findAllRecruit"})
     public Recruit save(Recruit recruit) {
         if (recruit.getId() != null) {
             recruit.setUpdateTime(new Date());

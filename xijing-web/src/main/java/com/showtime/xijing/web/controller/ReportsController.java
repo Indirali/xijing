@@ -41,7 +41,7 @@ public class ReportsController {
 
     @RequestMapping(value = "/report", method = RequestMethod.POST)
     public Result reportRecruit(Reports reports) {
-        User user = userService.findOne(reports.getUser().getId());
+        User user = userService.findUserById(reports.getUser().getId());
         if (user.getPhoneNumber() == null || user.getWxNumber() == null || user.getWxImage() == 0) {
             return Result.noInformation();
         }
@@ -51,14 +51,14 @@ public class ReportsController {
 
     @RequestMapping(value = "/cancel", method = RequestMethod.GET)
     public Result cancelReport(long reportId) {
-        Reports reports = reportsService.findById(reportId);
+        Reports reports = reportsService.findReportById(reportId);
         reports.setStatus(3);
         return Result.success();
     }
 
     @RequestMapping(value = "/like", method = RequestMethod.GET)
     public Result likeReportUser(long reportId) {
-        Reports reports = reportsService.findById(reportId);
+        Reports reports = reportsService.findReportById(reportId);
         reports.setStatus(1);
         reportsService.save(reports);
         return Result.success();
@@ -66,7 +66,7 @@ public class ReportsController {
 
     @RequestMapping(value = "/dislike", method = RequestMethod.GET)
     public Result dislikeReportUser(long reportId) {
-        Reports reports = reportsService.findById(reportId);
+        Reports reports = reportsService.findReportById(reportId);
         reports.setStatus(2);
         reportsService.save(reports);
         return Result.success();
@@ -74,7 +74,7 @@ public class ReportsController {
 
     @RequestMapping(value = "/filtrate", method = RequestMethod.GET)
     public Result filtrateReportUser(long recruitInfoId) {
-        RecruitInfo recruitInfo = recruitInfoService.findOne(recruitInfoId);
+        RecruitInfo recruitInfo = recruitInfoService.findRecruitInfoById(recruitInfoId);
         List<Reports> unDoReports = reportsService.findByReportRecruitInfoAndStatus(recruitInfo, 0);
         List<Reports> likeReports = reportsService.findByReportRecruitInfoAndStatus(recruitInfo, 1);
         List<Reports> dislikeReports = reportsService.findByReportRecruitInfoAndStatus(recruitInfo, 2);

@@ -36,7 +36,7 @@ public class UserController {
      */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public Result findAll(Pageable pageable) {
-        return Result.success(userService.findAll(pageable));
+        return Result.success(userService.findAllUser(pageable));
     }
 
     /**

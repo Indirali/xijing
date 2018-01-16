@@ -4,6 +4,8 @@ import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.entity.Reports;
 import com.showtime.xijing.repository.ReportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -25,6 +27,7 @@ public class ReportsService {
         this.reportsRepository = reportsRepository;
     }
 
+    @CachePut(value = {"findReportById", "findByReportRecruitInfoAndStatus"})
     public Reports save(Reports reports) {
         if (reports.getId() != null) {
             reports.setUpdateTime(new Date());
@@ -35,10 +38,12 @@ public class ReportsService {
         return reportsRepository.save(reports);
     }
 
-    public Reports findById(long id) {
+    @Cacheable(value = "findReportById")
+    public Reports findReportById(long id) {
         return reportsRepository.findOne(id);
     }
 
+    @Cacheable(value = "findByReportRecruitInfoAndStatus")
     public List<Reports> findByReportRecruitInfoAndStatus(RecruitInfo recruitInfo, int status) {
         return reportsRepository.findByReportRecruitInfoAndStatus(recruitInfo, status);
     }

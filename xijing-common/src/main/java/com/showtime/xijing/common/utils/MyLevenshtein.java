@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MyLevenshtein {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         //要比较的两个字符串
         String str1 = "今天星期四";
         String str2 = "星期四是今天";
@@ -23,7 +23,7 @@ public class MyLevenshtein {
         }
         long t2 = System.currentTimeMillis();
         System.out.println(" 耗费时间： " + (t2 - t1) + "  ms ");
-    }
+    }*/
 
     /**
      * DNA分析 　　拼字检查 　　语音辨识 　　抄袭侦测

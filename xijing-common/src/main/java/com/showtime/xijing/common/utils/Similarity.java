@@ -76,11 +76,11 @@ public class Similarity {
         return result;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         String s1 = "今天星期四";
         String s2 = "星期四是今天";
         Similarity similarity = new Similarity(s1, s2);
         System.out.println(similarity.sim());
-    }
+    }*/
 
 }

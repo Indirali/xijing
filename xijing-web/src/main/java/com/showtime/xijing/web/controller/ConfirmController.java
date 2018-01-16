@@ -43,8 +43,8 @@ public class ConfirmController {
 
     @RequestMapping(value = "/userConfirm", method = RequestMethod.GET)
     public Result userConfirm(Confirm confirm) {
-        User user = userService.findOne(confirm.getUser().getId());
-        Recruit recruit = recruitService.findById(confirm.getRecruit().getId());
+        User user = userService.findUserById(confirm.getUser().getId());
+        Recruit recruit = recruitService.findRecruitById(confirm.getRecruit().getId());
         Date date = recruit.getParticipationTime();
         Assert.notNull(confirmService.findByUserAndCreateTimeBetween(user, DateUtil.StartTime(date), DateUtil.EndTime(date)), "当天已有行程，不能再进行确认");
         confirmService.save(confirm);
@@ -53,7 +53,7 @@ public class ConfirmController {
 
     @RequestMapping(value = "/userSchedule", method = RequestMethod.GET)
     public Result userSchedule(long userId) {
-        User user = userService.findOne(userId);
+        User user = userService.findUserById(userId);
         return Result.success(confirmService.findByUser(user));
     }
 

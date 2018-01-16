@@ -52,7 +52,7 @@ public class RecruitController {
      */
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public Result findRecruitInfo(long recruitId) {
-        return Result.success(recruitService.findById(recruitId));
+        return Result.success(recruitService.findRecruitById(recruitId));
     }
 
 }

@@ -24,7 +24,7 @@ public class RecruitInfoService {
         this.recruitInfoRepository = recruitInfoRepository;
     }
 
-    public RecruitInfo findOne(long id) {
+    public RecruitInfo findRecruitInfoById(long id) {
         return recruitInfoRepository.findOne(id);
     }
 
