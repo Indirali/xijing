@@ -1,7 +1,6 @@
 package com.showtime.xijing.entity;
 
 import com.showtime.xijing.common.entity.BaseEntity;
-import com.showtime.xijing.convert.EmojiConverter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -32,7 +31,7 @@ public class User extends BaseEntity<Long> {
     private String latitude;
 
     @NotNull(message = "昵称不能为空.")
-    @Convert(converter = EmojiConverter.class)
+    //@Convert(converter = EmojiConverter.class)
     private String nickname;
 
     @NotNull(message = "不能为空.")

@@ -9,6 +9,7 @@ import com.showtime.xijing.utils.GaoDeMapUtil;
 import com.showtime.xijing.utils.RequestAll;
 import com.showtime.xijing.utils.WXRequestUtil;
 import com.showtime.xijing.web.utils.AesCbcUtil;
+import com.showtime.xijing.web.utils.EmojiFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class IdentityController {
                 String result = AesCbcUtil.decrypt(encryptedData, session_key, iv, "UTF-8");
                 JsonElement userInfo = new JsonParser().parse(result);
                 User base = new User();
-                base.setNickname(userInfo.getAsJsonObject().get("nickName").getAsString());
+                base.setNickname(EmojiFilter.filterEmoji(userInfo.getAsJsonObject().get("nickName").getAsString()));
                 base.setSex(userInfo.getAsJsonObject().get("gender").getAsInt());
                 base.setHeadPortrait(userInfo.getAsJsonObject().get("avatarUrl").getAsString());
                 base.setOpenId(openid);
