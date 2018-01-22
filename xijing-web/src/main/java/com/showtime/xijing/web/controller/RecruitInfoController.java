@@ -1,5 +1,6 @@
 package com.showtime.xijing.web.controller;
 
+import com.showtime.xijing.annotation.UserAuth;
 import com.showtime.xijing.common.Result;
 import com.showtime.xijing.service.RecruitInfoService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,7 @@ public class RecruitInfoController {
      * @param recruitInfoId
      * @return
      */
+    @UserAuth
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public Result saveRecruit(long recruitInfoId) {
         recruitInfoService.delete(recruitInfoId);

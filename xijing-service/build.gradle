@@ -10,6 +10,7 @@ dependencies {
 
     compile libraries.'spring-boot-starter-data-redis'
     compile libraries.'spring-boot-starter-activemq'
+    compile libraries.'spring-boot-starter-aop'
     compile libraries.'yunpian-java-sdk'
     compile libraries.'mysql-connector-java'
     compile libraries.'druid'

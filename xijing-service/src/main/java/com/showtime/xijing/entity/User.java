@@ -62,7 +62,7 @@ public class User extends BaseEntity<Long> {
 
     private String idCard;
 
-    private int authStatus;
+    private boolean authStatus;
 
     private long wxImage;
 

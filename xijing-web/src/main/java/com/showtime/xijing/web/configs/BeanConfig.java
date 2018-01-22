@@ -1,5 +1,6 @@
 package com.showtime.xijing.web.configs;
 
+import com.showtime.xijing.aspect.UserAuthAspect;
 import com.showtime.xijing.common.observerableEntity.ObservableEntityListener;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,11 @@ import javax.jms.Queue;
 
 @Configuration
 public class BeanConfig {
+
+    @Bean
+    public UserAuthAspect userAuthAspect() {
+        return new UserAuthAspect();
+    }
 
     @Bean
     public ObservableEntityListener observableEntityListener() {

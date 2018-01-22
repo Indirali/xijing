@@ -1,13 +1,12 @@
 package com.showtime.xijing.web.controller;
 
+import com.showtime.xijing.annotation.UserAuth;
 import com.showtime.xijing.common.Result;
 import com.showtime.xijing.entity.Recruit;
 import com.showtime.xijing.entity.RecruitCondition;
 import com.showtime.xijing.entity.RecruitInfo;
-import com.showtime.xijing.entity.User;
 import com.showtime.xijing.service.RecruitInfoService;
 import com.showtime.xijing.service.RecruitService;
-import com.showtime.xijing.service.UserService;
 import com.showtime.xijing.service.ValidateService;
 import com.showtime.xijing.web.vo.RecruitVo;
 import lombok.extern.slf4j.Slf4j;
@@ -25,17 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/recruit")
 public class RecruitController {
 
-    private UserService userService;
     private RecruitService recruitService;
     private ValidateService validateService;
     private RecruitInfoService recruitInfoService;
 
     @Autowired
-    public RecruitController(UserService userService,
-                             RecruitService recruitService,
+    public RecruitController(RecruitService recruitService,
                              ValidateService validateService,
                              RecruitInfoService recruitInfoService) {
-        this.userService = userService;
         this.recruitService = recruitService;
         this.validateService = validateService;
         this.recruitInfoService = recruitInfoService;
@@ -60,12 +56,9 @@ public class RecruitController {
      * @param recruitVo
      * @return
      */
+    @UserAuth
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result saveRecruit(RecruitVo recruitVo, String openId) {
-        User user = userService.findByOpenId(openId);
-        if (user.getAuthStatus() == 0) {
-            return Result.noAuth();
-        }
+    public Result saveRecruit(RecruitVo recruitVo) {
         validateService.validateObject(recruitVo.getRecruit());
         validateService.validateObjectList(recruitVo.getRecruitInfos());
         Long[] recruitInfoIds = new Long[recruitVo.getRecruitInfos().size()];

@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NotificationRepository extends PagingAndSortingRepository<Notification, Long> {
 
-    Notification findByUserAndOtherId(User user, long otherId);
+    Notification findByUserAndConfirmId(User user, long confirmId);
+
+    Notification findByUserAndRecruitInfoId(User user, long recruitInfoId);
 
 }

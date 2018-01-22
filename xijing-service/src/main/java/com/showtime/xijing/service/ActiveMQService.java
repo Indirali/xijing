@@ -74,7 +74,7 @@ public class ActiveMQService {
     @JmsListener(destination = "userQueue")
     public void userQueue(Confirm confirm) {
         log.info(confirm.toString());
-        Notification notification = notificationRepository.findByUserAndOtherId(confirm.getUser(), confirm.getId());
+        Notification notification = notificationRepository.findByUserAndConfirmId(confirm.getUser(), confirm.getId());
         NotificationInfo notificationInfo = WXNotificationUtil.scheduleNotificationParam(confirm, notification.getNumber());
         String url = WXRequestUtil.sendNotification(verifyCodeService.getWXAccessTokenCache());
         HttpRequestUtil.httpRequest(url, "POST", new Gson().toJson(notificationInfo));
@@ -91,14 +91,14 @@ public class ActiveMQService {
 
     @JmsListener(destination = "recruitQueue")
     public void recruitInfoQueue(Reports report) {
-        Notification notification = notificationRepository.findByUserAndOtherId(report.getUser(), report.getReportRecruitInfo().getId());
+        Notification notification = notificationRepository.findByUserAndRecruitInfoId(report.getUser(), report.getReportRecruitInfo().getId());
         String url = WXRequestUtil.sendNotification(verifyCodeService.getWXAccessTokenCache());
         NotificationInfo notificationString = WXNotificationUtil.recruitPassNotificationParam(report, report.getUser().getOpenId(), notification.getNumber());
         HttpRequestUtil.httpRequest(url, "POST", new Gson().toJson(notificationString));
     }
 
     public void recruitInfoAllPush(Long recruitInfoId) {
-        List<Reports> reports = reportsRepository.findByReportRecruitInfoIdAndAndNotification(recruitInfoId, false);
+        List<Reports> reports = reportsRepository.findByReportRecruitInfoIdAndNotification(recruitInfoId, false);
         for (Reports report : reports) {
             pushExecutor.execute(() -> jmsMessagingTemplate.convertAndSend("recruitQueue", report));
         }

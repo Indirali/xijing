@@ -23,7 +23,9 @@ public class Notification extends BaseEntity<Long> {
     @NotNull(message = "用户不能为空.")
     private User user;
 
-    private long otherId;
+    private Confirm confirmId;
+
+    private RecruitInfo recruitInfoId;
 
     private String templateType;
 

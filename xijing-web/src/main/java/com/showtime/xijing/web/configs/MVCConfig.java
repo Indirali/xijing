@@ -2,7 +2,6 @@ package com.showtime.xijing.web.configs;
 
 import com.showtime.xijing.common.exception.handler.BaseExceptionResolver;
 import com.showtime.xijing.common.exception.handler.ValidateExceptionResolver;
-import com.showtime.xijing.web.interceptor.AuthInterceptor;
 import com.showtime.xijing.web.interceptor.LoginInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -22,9 +21,6 @@ import java.util.List;
 public class MVCConfig extends WebMvcConfigurerAdapter {
 
     @Resource
-    private AuthInterceptor authInterceptor;
-
-    @Resource
     private LoginInterceptor loginInterceptor;
 
     @Resource
@@ -37,7 +33,6 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         //该拦截器后的拦截器不能再有数据库操作
         registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/login");
-        registry.addInterceptor(authInterceptor).addPathPatterns("/recruit/save").addPathPatterns("/report/filtrate").addPathPatterns("/report/like").addPathPatterns("/report/dislike");
     }
 
     @Override

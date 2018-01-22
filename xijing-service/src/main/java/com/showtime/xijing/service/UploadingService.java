@@ -47,11 +47,10 @@ public class UploadingService {
     public UserFile uploadingImage(MultipartFile mf, boolean type) throws IOException {
         papers(mf, type);
         String filename = RandomUtil.getRandomFileName();
-        String fileName = mf.getOriginalFilename();
-        String ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();
-        String url = QiniuUtil.getFileAccessUrl(fileName);
+        String ext = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf(".") + 1, mf.getOriginalFilename().length()).toLowerCase();
+        String url = QiniuUtil.getFileAccessUrl(filename);
         UserFile file = new UserFile();
-        file.setFileName(fileName);
+        file.setFileName(filename);
         file.setFormat(ext);
         file.setType(type ? Image : Video);
         file.setUrl(url);
@@ -88,7 +87,7 @@ public class UploadingService {
         }
         String fileName = file.getOriginalFilename();
         String ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();
-        Assert.isTrue(!fileTypes.contains(ext), "文件格式错误");
+        Assert.isTrue(fileTypes.contains(ext), "文件格式错误");
     }
 
 }
