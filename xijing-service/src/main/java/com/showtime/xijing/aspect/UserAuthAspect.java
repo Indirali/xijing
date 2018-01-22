@@ -3,12 +3,12 @@ package com.showtime.xijing.aspect;
 import com.showtime.xijing.annotation.UserAuth;
 import com.showtime.xijing.entity.User;
 import com.showtime.xijing.service.UserService;
-import org.apache.http.HttpRequest;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,39 +24,16 @@ public class UserAuthAspect {
     @Autowired
     private UserService userService;
 
-    public UserAuthAspect() {
+    @Before("@annotation(userAuth)")
+    public void limitMethod(UserAuth userAuth) throws Throwable {
+        limit();
     }
 
-    @Around("@annotation(userAuth)")
-    public void limitMethod(ProceedingJoinPoint pjp, UserAuth userAuth) throws Throwable {
-        limit(pjp);
-    }
-
-    @Around("@within(userAuth)")
-    public void limitType(ProceedingJoinPoint pjp, UserAuth userAuth) throws Throwable {
-        limit(pjp);
-    }
-
-    private void limit(ProceedingJoinPoint pjp) {
-        Object[] args = pjp.getArgs();
-        HttpServletRequest request = null;
-        for (int i = 0; i < args.length; i++) {
-            if (args[i] instanceof HttpRequest) {
-                request = (HttpServletRequest) args[i];
-                break;
-            }
-        }
-        if (request == null) {
-            try {
-                throw new Exception("方法中缺失HttpServletRequest参数");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    private void limit() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String openId = request.getParameter("openId");
         User user = userService.findByOpenId(openId);
         Assert.isTrue(user.isAuthStatus(), "用户未进行实名认证!");
     }
-
 
 }
