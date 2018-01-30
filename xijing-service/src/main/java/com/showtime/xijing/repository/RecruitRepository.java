@@ -19,4 +19,6 @@ public interface RecruitRepository extends PagingAndSortingRepository<Recruit, L
 
     List<Recruit> findByUserIn(List<User> users);
 
+    List<Recruit> findByUser(User user);
+
 }

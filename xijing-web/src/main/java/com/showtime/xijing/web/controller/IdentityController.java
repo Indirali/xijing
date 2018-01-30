@@ -47,7 +47,6 @@ public class IdentityController {
         String openid = json.getAsJsonObject().get("openid").getAsString();
         User user = userService.findByOpenId(openid);
         String session_key = json.getAsJsonObject().get("session_key").getAsString();
-        boolean newUser = false;
         try {
             if (user == null) {
                 String result = AesCbcUtil.decrypt(encryptedData, session_key, iv, "UTF-8");
@@ -61,7 +60,6 @@ public class IdentityController {
                 base.setLastLoginTime(LocalDateTime.now());
                 base.setPlace(GaoDeMapUtil.getLocation(longitude, latitude));
                 user = userService.save(base);
-                newUser = true;
             } else {
                 user.setLongitude(longitude);
                 user.setLatitude(latitude);
@@ -74,7 +72,7 @@ public class IdentityController {
             log.debug(ExceptionUtils.getStackTrace(e));
             return Result.fail("用户信息解析失败");
         }
-        return Result.success().data("User", user).data("newUser", newUser);
+        return Result.success().data("User", user);
     }
 
     /**

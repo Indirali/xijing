@@ -18,7 +18,7 @@ import java.util.List;
 public interface ConfirmRepository extends PagingAndSortingRepository<Confirm, Long> {
     List<Confirm> findByUser(User user);
 
-    Confirm findByUserAndCreateTimeBetween(User user, LocalDateTime startTime, LocalDateTime endTime);
+    Confirm findByUserAndConfirmTimeBetween(User user, LocalDateTime startTime, LocalDateTime endTime);
 
     List<Confirm> findByStatusAndConfirmTimeBetween(int status, LocalDateTime startTime, LocalDateTime endTime);
 }

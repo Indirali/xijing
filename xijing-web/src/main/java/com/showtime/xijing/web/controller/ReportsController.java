@@ -39,6 +39,12 @@ public class ReportsController {
         this.recruitInfoService = recruitInfoService;
     }
 
+    /**
+     * 用户报名活动
+     *
+     * @param reports
+     * @return
+     */
     @RequestMapping(value = "/report", method = RequestMethod.POST)
     public Result reportRecruit(Reports reports) {
         User user = userService.findUserById(reports.getUser().getId());
@@ -49,12 +55,24 @@ public class ReportsController {
         return Result.success();
     }
 
+    /**
+     * 用户的报名列表
+     *
+     * @param openId
+     * @return
+     */
     @RequestMapping(value = "/userReport", method = RequestMethod.GET)
     public Result userReport(String openId) {
         User user = userService.findByOpenId(openId);
         return Result.success(reportsService.findAllByUser(user));
     }
 
+    /**
+     * 取消报名
+     *
+     * @param reportId
+     * @return
+     */
     @RequestMapping(value = "/cancel", method = RequestMethod.GET)
     public Result cancelReport(long reportId) {
         Reports reports = reportsService.findReportById(reportId);
@@ -62,6 +80,12 @@ public class ReportsController {
         return Result.success();
     }
 
+    /**
+     * 用户被喜欢
+     *
+     * @param reportId
+     * @return
+     */
     @RequestMapping(value = "/like", method = RequestMethod.GET)
     public Result likeReportUser(long reportId) {
         Reports reports = reportsService.findReportById(reportId);
@@ -70,6 +94,12 @@ public class ReportsController {
         return Result.success();
     }
 
+    /**
+     * 用户进入待选
+     *
+     * @param reportId
+     * @return
+     */
     @RequestMapping(value = "/dislike", method = RequestMethod.GET)
     public Result dislikeReportUser(long reportId) {
         Reports reports = reportsService.findReportById(reportId);
@@ -78,6 +108,12 @@ public class ReportsController {
         return Result.success();
     }
 
+    /**
+     * 进行筛选
+     *
+     * @param recruitInfoId
+     * @return
+     */
     @RequestMapping(value = "/filtrate", method = RequestMethod.GET)
     public Result filtrateReportUser(long recruitInfoId) {
         RecruitInfo recruitInfo = recruitInfoService.findRecruitInfoById(recruitInfoId);

@@ -46,7 +46,7 @@ public class ConfirmController {
         User user = userService.findUserById(confirm.getUser().getId());
         Recruit recruit = recruitService.findRecruitById(confirm.getRecruit().getId());
         LocalDateTime date = recruit.getParticipationTime();
-        Assert.notNull(confirmService.findByUserAndCreateTimeBetween(user, LocalDateTimeUtils.getDayStart(date), LocalDateTimeUtils.getDayEnd(date)), "当天已有行程，不能再进行确认");
+        Assert.notNull(confirmService.findByUserAndConfirmTimeBetween(user, LocalDateTimeUtils.getDayStart(date), LocalDateTimeUtils.getDayEnd(date)), "当天已有行程，不能再进行确认");
         confirmService.save(confirm);
         return Result.success();
     }

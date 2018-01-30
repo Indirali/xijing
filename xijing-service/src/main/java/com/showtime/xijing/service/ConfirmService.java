@@ -29,8 +29,8 @@ public class ConfirmService {
         return confirmRepository.save(confirm);
     }
 
-    public Confirm findByUserAndCreateTimeBetween(User user, LocalDateTime startDate, LocalDateTime endDate) {
-        return confirmRepository.findByUserAndCreateTimeBetween(user, startDate, endDate);
+    public Confirm findByUserAndConfirmTimeBetween(User user, LocalDateTime startDate, LocalDateTime endDate) {
+        return confirmRepository.findByUserAndConfirmTimeBetween(user, startDate, endDate);
     }
 
     public List<Confirm> findByUser(User user) {

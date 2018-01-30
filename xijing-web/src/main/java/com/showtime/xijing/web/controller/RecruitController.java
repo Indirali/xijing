@@ -3,8 +3,10 @@ package com.showtime.xijing.web.controller;
 import com.showtime.xijing.common.Result;
 import com.showtime.xijing.entity.Recruit;
 import com.showtime.xijing.entity.RecruitInfo;
+import com.showtime.xijing.entity.User;
 import com.showtime.xijing.service.RecruitInfoService;
 import com.showtime.xijing.service.RecruitService;
+import com.showtime.xijing.service.UserService;
 import com.showtime.xijing.service.ValidateService;
 import com.showtime.xijing.web.vo.RecruitVo;
 import lombok.extern.slf4j.Slf4j;
@@ -22,14 +24,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/recruit")
 public class RecruitController {
 
+    private UserService userService;
     private RecruitService recruitService;
     private ValidateService validateService;
     private RecruitInfoService recruitInfoService;
 
     @Autowired
-    public RecruitController(RecruitService recruitService,
+    public RecruitController(UserService userService,
+                             RecruitService recruitService,
                              ValidateService validateService,
                              RecruitInfoService recruitInfoService) {
+        this.userService = userService;
         this.recruitService = recruitService;
         this.validateService = validateService;
         this.recruitInfoService = recruitInfoService;
@@ -76,6 +81,18 @@ public class RecruitController {
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public Result findRecruitInfo(long recruitId) {
         return Result.success(recruitService.findRecruitById(recruitId));
+    }
+
+    /**
+     * 用户发布的招聘
+     *
+     * @param openId
+     * @return
+     */
+    @RequestMapping(value = "/userRecruit", method = RequestMethod.GET)
+    public Result userRecruit(String openId) {
+        User user = userService.findByOpenId(openId);
+        return Result.success(recruitService.findByUser(user));
     }
 
 }
