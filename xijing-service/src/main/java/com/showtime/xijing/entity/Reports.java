@@ -10,7 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * 报名表
@@ -39,7 +39,7 @@ public class Reports extends BaseEntity<Long> {
     @ManyToOne
     private RecruitInfo reportRecruitInfo;
 
-    private Date reportTime;
+    private LocalDateTime reportTime;
 
     private boolean notification;
 

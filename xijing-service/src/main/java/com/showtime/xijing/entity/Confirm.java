@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /**
  * 确认表
@@ -31,6 +32,8 @@ public class Confirm extends BaseEntity<Long> {
     @ManyToOne
     @NotNull(message = "确认招聘详情不能为空.")
     private RecruitInfo recruitInfo;
+
+    private LocalDateTime confirmTime;
 
     private int status;
 

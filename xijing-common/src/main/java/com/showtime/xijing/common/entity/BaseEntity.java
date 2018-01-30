@@ -1,6 +1,5 @@
 package com.showtime.xijing.common.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.showtime.xijing.common.observerableEntity.ObservableEntity;
 import com.showtime.xijing.common.utils.PrettyTimeUtils;
@@ -9,7 +8,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by liudajiang on 2017/6/19.
@@ -40,14 +41,24 @@ public abstract class BaseEntity<ID extends Serializable> extends ObservableEnti
      */
     @Column(name = "create_time", updatable = false)
     @JsonSerialize
-    protected Date createTime;
+    protected Long createTime;
 
     /**
      * 更新时间
      */
     @JsonSerialize
-    protected Date updateTime;
+    protected Long updateTime;
 
+
+    /**
+     * 格式化显示创建时间
+     *
+     * @return
+     * @create_date 2016年1月4日
+     */
+    public String displayCreateTime() {
+        return Instant.ofEpochMilli(createTime).atZone(ZoneId.systemDefault()).toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 
     /**
      * 显示据现在的时间段
@@ -64,9 +75,9 @@ public abstract class BaseEntity<ID extends Serializable> extends ObservableEnti
      *
      * @return
      */
-    @JsonIgnore
     @Transient
     public boolean isNew() {
+
         return null == getId();
     }
 
@@ -125,6 +136,24 @@ public abstract class BaseEntity<ID extends Serializable> extends ObservableEnti
         return ReflectionToStringBuilder.toString(this);
     }
 
+    public enum Visible {
+        ALL, AUTH_ONLY, INVISIBLE
+    }
+
+    /**
+     * 通用验证Group
+     *
+     * @author liudajiang
+     * @create_date 2015年12月2日
+     */
+    public static class Valid {
+        public static interface Create {
+        }
+
+
+        public static interface Update {
+        }
+    }
 
 }
 

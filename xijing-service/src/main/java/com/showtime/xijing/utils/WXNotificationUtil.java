@@ -1,6 +1,6 @@
 package com.showtime.xijing.utils;
 
-import com.showtime.xijing.common.utils.DateUtil;
+import com.showtime.xijing.common.utils.LocalDateTimeUtils;
 import com.showtime.xijing.entity.Confirm;
 import com.showtime.xijing.entity.NotificationInfo;
 import com.showtime.xijing.entity.NotificationInfoData;
@@ -33,7 +33,7 @@ public class WXNotificationUtil {
         notificationInfo.setForm_id(formId);
         Map<String, NotificationInfoData> notificationInfoData = new HashMap<>();
         NotificationInfoData first = new NotificationInfoData(reports.getReportRecruit().getTitle(), "#000000");
-        NotificationInfoData second = new NotificationInfoData(DateUtil.toString(reports.getReportRecruit().getParticipationTime()), "#000000");
+        NotificationInfoData second = new NotificationInfoData(LocalDateTimeUtils.formatTime(reports.getReportRecruit().getParticipationTime(), "yyyy年MM月dd日 HH:mm"), "#000000");
         NotificationInfoData thirdly = new NotificationInfoData(reports.getReportRecruit().getUser().getPhoneNumber(), "#000000");
         NotificationInfoData fourth = new NotificationInfoData(reports.getReportRecruit().getPoint(), "#000000");
         String salary = String.valueOf(reports.getReportRecruitInfo().getSalary());
@@ -66,7 +66,7 @@ public class WXNotificationUtil {
         notificationInfo.setForm_id(formId);
         Map<String, NotificationInfoData> notificationInfoData = new HashMap<>();
         NotificationInfoData first = new NotificationInfoData("你的报名的活动马上要开始了", "#000000");
-        NotificationInfoData second = new NotificationInfoData(DateUtil.toString(confirm.getRecruit().getParticipationTime()), "#000000");
+        NotificationInfoData second = new NotificationInfoData(LocalDateTimeUtils.formatTime(confirm.getRecruit().getParticipationTime(), "yyyy年MM月dd日 HH:mm"), "#000000");
         NotificationInfoData thirdly = new NotificationInfoData(confirm.getRecruit().getPoint(), "#000000");
         NotificationInfoData fourth = new NotificationInfoData(confirm.getRecruitInfo().getRemarks(), "#000000");
         NotificationInfoData fifth = new NotificationInfoData(confirm.getRecruit().getUser().getNickname(), "#000000");

@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -31,10 +31,8 @@ public class User extends BaseEntity<Long> {
     private String latitude;
 
     @NotNull(message = "昵称不能为空.")
-    //@Convert(converter = EmojiConverter.class)
     private String nickname;
 
-    @NotNull(message = "不能为空.")
     private String headPortrait;
 
     // 0 未知  1 男   2 女
@@ -51,9 +49,13 @@ public class User extends BaseEntity<Long> {
     @JoinColumn(name = "video")
     private UserFile video;
 
+    @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.PERSIST})
+    @JoinColumn(name = "wx_image")
+    private UserFile wxImage;
+
     private String introduction;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.PERSIST})
     private UserInfo userInfo;
 
     @NotNull(message = "角色不能为空.")
@@ -63,8 +65,6 @@ public class User extends BaseEntity<Long> {
 
     private boolean authStatus;
 
-    private long wxImage;
-
     private String wxNumber;
 
     private String phoneNumber;
@@ -73,7 +73,7 @@ public class User extends BaseEntity<Long> {
 
     private int status;
 
-    private Date lastLoginTime;
+    private LocalDateTime lastLoginTime;
 
     @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private List<UserFile> userFiles;

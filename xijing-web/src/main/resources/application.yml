@@ -5,6 +5,9 @@ spring:
         password: 3828399.lifan
         driver-class-name: com.mysql.jdbc.Driver
         type: com.alibaba.druid.pool.DruidDataSource
+#    jpa:
+#      hibernate:
+#        ddl-auto: update
     redis:
       host: 127.0.0.1
       port: 6379

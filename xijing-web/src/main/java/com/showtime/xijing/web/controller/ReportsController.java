@@ -42,11 +42,17 @@ public class ReportsController {
     @RequestMapping(value = "/report", method = RequestMethod.POST)
     public Result reportRecruit(Reports reports) {
         User user = userService.findUserById(reports.getUser().getId());
-        if (user.getPhoneNumber() == null || user.getWxNumber() == null || user.getWxImage() == 0) {
+        if (user.getPhoneNumber() == null || user.getWxNumber() == null || user.getWxImage() == null) {
             return Result.noInformation();
         }
         reportsService.save(reports);
         return Result.success();
+    }
+
+    @RequestMapping(value = "/userReport", method = RequestMethod.GET)
+    public Result userReport(String openId) {
+        User user = userService.findByOpenId(openId);
+        return Result.success(reportsService.findAllByUser(user));
     }
 
     @RequestMapping(value = "/cancel", method = RequestMethod.GET)

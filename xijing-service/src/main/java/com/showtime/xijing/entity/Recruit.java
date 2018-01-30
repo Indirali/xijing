@@ -9,7 +9,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -49,7 +49,7 @@ public class Recruit extends BaseEntity<Long> {
 
     private int status;
 
-    private Date participationTime;
+    private LocalDateTime participationTime;
 
     @Fetch(FetchMode.SUBSELECT)
     @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.EAGER)

@@ -1,9 +1,7 @@
 package com.showtime.xijing.web.controller;
 
-import com.showtime.xijing.annotation.UserAuth;
 import com.showtime.xijing.common.Result;
 import com.showtime.xijing.entity.Recruit;
-import com.showtime.xijing.entity.RecruitCondition;
 import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.service.RecruitInfoService;
 import com.showtime.xijing.service.RecruitService;
@@ -41,13 +39,11 @@ public class RecruitController {
      * 获取全部招聘信息
      *
      * @param pageable
-     * @param recruitCondition
      * @return
      */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public Result findRecruitInfo(Pageable pageable,
-                                  RecruitCondition recruitCondition) {
-        return Result.success(recruitService.findAll(recruitCondition, pageable));
+    public Result findRecruitInfo(Pageable pageable) {
+        return Result.success(recruitService.findAll(pageable));
     }
 
     /**
@@ -56,7 +52,6 @@ public class RecruitController {
      * @param recruitVo
      * @return
      */
-    @UserAuth
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result saveRecruit(RecruitVo recruitVo) {
         validateService.validateObject(recruitVo.getRecruit());

@@ -35,8 +35,8 @@ public class RecruitService {
         this.recruitRepository = recruitRepository;
     }
 
-    @Cacheable(value = "findAllRecruit")
-    public Page<Recruit> findAll(RecruitCondition recruitCondition, Pageable pageable) {
+    @Cacheable(value = "findAllRecruitByCondition")
+    public Page<Recruit> findAllByCondition(RecruitCondition recruitCondition, Pageable pageable) {
         Page<Recruit> recruits = recruitRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
             if (recruitCondition.getRecruitType() != null)
@@ -54,6 +54,14 @@ public class RecruitService {
         return recruits;
     }
 
+    @Cacheable(value = "findAllRecruit")
+    public Page<Recruit> findAll(Pageable pageable) {
+        Page<Recruit> recruits = recruitRepository.findAll(pageable);
+        for (Recruit recruit : recruits)
+            recruit.setReportCount(reportsRepository.countByReportRecruit(recruit));
+        return recruits;
+    }
+
     @Cacheable(value = "findRecruitById")
     public Recruit findRecruitById(long id) {
         return recruitRepository.findOne(id);
@@ -64,7 +72,7 @@ public class RecruitService {
         return recruitRepository.findByUserIn(users);
     }
 
-    @CachePut(value = {"findRecruitById", "findRecruitByUserList", "findAllRecruit"})
+    @CachePut(value = {"findRecruitById", "findRecruitByUserList", "findAllRecruit", "findAllRecruitByCondition"})
     public Recruit save(Recruit recruit) {
         return recruitRepository.save(recruit);
     }

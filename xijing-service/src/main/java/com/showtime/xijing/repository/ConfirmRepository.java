@@ -5,7 +5,7 @@ import com.showtime.xijing.entity.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ import java.util.List;
 public interface ConfirmRepository extends PagingAndSortingRepository<Confirm, Long> {
     List<Confirm> findByUser(User user);
 
-    Confirm findByUserAndCreateTimeBetween(User user, Date startTime, Date endTime);
+    Confirm findByUserAndCreateTimeBetween(User user, LocalDateTime startTime, LocalDateTime endTime);
 
-    List<Confirm> findByStatusAndCreateTimeBetween(int status, Date startTime, Date endTime);
+    List<Confirm> findByStatusAndConfirmTimeBetween(int status, LocalDateTime startTime, LocalDateTime endTime);
 }

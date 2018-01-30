@@ -1,11 +1,11 @@
 package com.showtime.xijing.service;
 
 import com.google.gson.Gson;
+import com.showtime.xijing.common.utils.LocalDateTimeUtils;
 import com.showtime.xijing.entity.Confirm;
 import com.showtime.xijing.entity.Notification;
 import com.showtime.xijing.entity.NotificationInfo;
 import com.showtime.xijing.entity.Reports;
-import com.showtime.xijing.enums.PushType;
 import com.showtime.xijing.repository.ConfirmRepository;
 import com.showtime.xijing.repository.NotificationRepository;
 import com.showtime.xijing.repository.ReportsRepository;
@@ -20,8 +20,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -61,11 +61,7 @@ public class ActiveMQService {
     // 每10分钟执行一次
     @Scheduled(cron = "0 0/1 * * * ?")
     public void userPush() {
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date());
-        c.add(Calendar.HOUR_OF_DAY, 2);
-        log.info("当前时间: " + new Date() + "   两个小时后: " + c.getTime());
-        List<Confirm> confirms = confirmRepository.findByStatusAndCreateTimeBetween(0, new Date(), c.getTime());
+        List<Confirm> confirms = confirmRepository.findByStatusAndConfirmTimeBetween(0, LocalDateTimeUtils.minu(LocalDateTime.now(), 2, ChronoUnit.HOURS), LocalDateTime.now());
         for (Confirm confirm : confirms) {
             pushExecutor.execute(() -> jmsMessagingTemplate.convertAndSend("userQueue", confirm));
         }

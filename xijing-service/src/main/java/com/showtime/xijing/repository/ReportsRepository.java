@@ -3,9 +3,11 @@ package com.showtime.xijing.repository;
 import com.showtime.xijing.entity.Recruit;
 import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.entity.Reports;
+import com.showtime.xijing.entity.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -18,6 +20,8 @@ import java.util.List;
 public interface ReportsRepository extends PagingAndSortingRepository<Reports, Long> {
 
     int countByReportRecruit(Recruit recruit);
+
+    List<Reports> findByUserAndReportTimeBetween(User user, LocalDateTime startTime, LocalDateTime endTime);
 
     List<Reports> findByNotificationAndIdIn(boolean notification, Long[] ids);
 

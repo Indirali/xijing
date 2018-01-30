@@ -6,7 +6,7 @@ import com.showtime.xijing.repository.ConfirmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -29,7 +29,7 @@ public class ConfirmService {
         return confirmRepository.save(confirm);
     }
 
-    public Confirm findByUserAndCreateTimeBetween(User user, Date startDate, Date endDate) {
+    public Confirm findByUserAndCreateTimeBetween(User user, LocalDateTime startDate, LocalDateTime endDate) {
         return confirmRepository.findByUserAndCreateTimeBetween(user, startDate, endDate);
     }
 

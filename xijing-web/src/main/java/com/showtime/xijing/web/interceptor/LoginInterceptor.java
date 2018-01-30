@@ -25,14 +25,8 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String openId = request.getParameter("openId");
         User user = userService.findByOpenId(openId);
-        if (user == null) {
-            Assert.notNull(user, "用户不存在,如有问题请在公众号【戏鲸汇演】留言!");
-            return false;
-        }
-        if (user.getCreditDegree() <= 300) {
-            Assert.notNull(user, "用户信用值过低,不能进行任何操作,如有问题请在公众号【戏鲸汇演】留言!");
-            return false;
-        }
+        Assert.notNull(user, "用户不存在,如有问题请在公众号【戏鲸汇演】留言!");
+        Assert.isTrue(user.getCreditDegree() > 300, "用户信用值过低,不能进行任何操作,如有问题请在公众号【戏鲸汇演】留言!");
         return true;
     }
 

@@ -2,7 +2,6 @@ package com.showtime.xijing.admin.controller;
 
 import com.showtime.xijing.common.Result;
 import com.showtime.xijing.entity.Recruit;
-import com.showtime.xijing.entity.RecruitCondition;
 import com.showtime.xijing.service.RecruitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,8 @@ public class RecruitController {
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public Result findRecruitInfo(Pageable pageable,
-                                  RecruitCondition recruitCondition) {
-        return Result.success(recruitService.findAll(recruitCondition, pageable));
+    public Result findRecruitInfo(Pageable pageable) {
+        return Result.success(recruitService.findAll(pageable));
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.showtime.xijing.web.controller;
 
-import com.showtime.xijing.annotation.UserAuth;
 import com.showtime.xijing.common.Result;
 import com.showtime.xijing.common.entity.MobilePhoneNumber;
 import com.showtime.xijing.common.entity.MobilePhoneUtils;
@@ -58,7 +57,6 @@ public class UserController {
      * @param openId
      * @return
      */
-    @UserAuth
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public Result findOnlyUser(String openId) {
         return Result.success(userService.findByOpenId(openId));

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by li on 2017/12/9.
@@ -55,18 +55,17 @@ public class IdentityController {
                 User base = new User();
                 base.setNickname(EmojiFilter.filterEmoji(userInfo.getAsJsonObject().get("nickName").getAsString()));
                 base.setSex(userInfo.getAsJsonObject().get("gender").getAsInt());
-                base.setHeadPortrait(userInfo.getAsJsonObject().get("avatarUrl").getAsString());
                 base.setOpenId(openid);
                 base.setLongitude(longitude);
                 base.setLatitude(latitude);
-                base.setLastLoginTime(new Date());
+                base.setLastLoginTime(LocalDateTime.now());
                 base.setPlace(GaoDeMapUtil.getLocation(longitude, latitude));
                 user = userService.save(base);
                 newUser = true;
             } else {
                 user.setLongitude(longitude);
                 user.setLatitude(latitude);
-                user.setLastLoginTime(new Date());
+                user.setLastLoginTime(LocalDateTime.now());
                 user.setPlace(GaoDeMapUtil.getLocation(longitude, latitude));
                 userService.save(user);
             }

@@ -1,7 +1,7 @@
 package com.showtime.xijing.web.controller;
 
 import com.showtime.xijing.common.Result;
-import com.showtime.xijing.common.utils.DateUtil;
+import com.showtime.xijing.common.utils.LocalDateTimeUtils;
 import com.showtime.xijing.entity.Confirm;
 import com.showtime.xijing.entity.Recruit;
 import com.showtime.xijing.entity.User;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Create with IntelliJ IDEA
@@ -45,8 +45,8 @@ public class ConfirmController {
     public Result userConfirm(Confirm confirm) {
         User user = userService.findUserById(confirm.getUser().getId());
         Recruit recruit = recruitService.findRecruitById(confirm.getRecruit().getId());
-        Date date = recruit.getParticipationTime();
-        Assert.notNull(confirmService.findByUserAndCreateTimeBetween(user, DateUtil.StartTime(date), DateUtil.EndTime(date)), "当天已有行程，不能再进行确认");
+        LocalDateTime date = recruit.getParticipationTime();
+        Assert.notNull(confirmService.findByUserAndCreateTimeBetween(user, LocalDateTimeUtils.getDayStart(date), LocalDateTimeUtils.getDayEnd(date)), "当天已有行程，不能再进行确认");
         confirmService.save(confirm);
         return Result.success();
     }

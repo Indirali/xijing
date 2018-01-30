@@ -4,7 +4,7 @@ import com.showtime.xijing.enums.RecruitType;
 import com.showtime.xijing.enums.SuperStarType;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Create with IntelliJ IDEA
@@ -19,8 +19,8 @@ public class RecruitCondition {
 
     private SuperStarType superStar;
 
-    private Date startTime;
+    private LocalDateTime startTime;
 
-    private Date endTime;
+    private LocalDateTime endTime;
 
 }
