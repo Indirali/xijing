@@ -1,0 +1,9 @@
+${AnsiColor.BLUE}    ___       ___       ___       ___       ___       ___
+${AnsiColor.BRIGHT_CYAN}   /\__\     /\  \     /\  \     /\  \     /\__\     /\  \
+${AnsiColor.GREEN}  |::L__L   _\:\  \   _\:\  \   _\:\  \   /:| _|_   /::\  \
+${AnsiColor.RED} /::::\__\ /\/::\__\ /\/::\__\ /\/::\__\ /::|/\__\ /:/\:\__\
+${AnsiColor.BRIGHT_MAGENTA} \;::;/__/ \::/\/__/ \::/\/__/ \::/\/__/ \/|::/  / \:\:\/__/
+${AnsiColor.YELLOW}  |::|__|   \:\__\    \/__/     \:\__\     |:/  /   \::/  /
+${AnsiColor.MAGENTA}   \/__/     \/__/               \/__/     \/__/     \/__/
+
+${AnsiColor.GREEN}:: Spring Boot :: ${spring-boot.formatted-version} ${application.formatted-version}

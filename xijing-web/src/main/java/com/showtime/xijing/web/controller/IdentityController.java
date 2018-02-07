@@ -40,7 +40,7 @@ public class IdentityController {
      * @param code 前台通过wx.login函数success微信服务器回传的code（有效期5min）
      * @return json格式数据 如果成功返回值为user对象
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result login(String encryptedData, String iv, String code, String longitude, String latitude) {
         JsonElement json = getWXContent(code);
         Assert.isTrue(json != null, "微信响应错误!");
