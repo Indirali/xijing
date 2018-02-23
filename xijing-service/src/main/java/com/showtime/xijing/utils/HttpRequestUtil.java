@@ -40,7 +40,8 @@ public class HttpRequestUtil {
         try {
             source = java.net.URLEncoder.encode(source, "GBK");
         } catch (UnsupportedEncodingException e) {
-            log.debug(ExceptionUtils.getStackTrace(e));
+            e.printStackTrace();
+            log.info("urlEncodeGBK：" + e.getMessage());
             return "0";
         }
         return source;
@@ -75,7 +76,8 @@ public class HttpRequestUtil {
             inputStream.close();
             httpUrlConn.disconnect();
         } catch (Exception e) {
-            log.debug(ExceptionUtils.getStackTrace(e));
+            e.printStackTrace();
+            log.info("httpRequest：" + e.getMessage());
         }
         return buffer.toString();
     }
@@ -97,7 +99,8 @@ public class HttpRequestUtil {
             // 获得返回的输入流
             inputStream = httpUrlConn.getInputStream();
         } catch (Exception e) {
-            log.debug(ExceptionUtils.getStackTrace(e));
+            e.printStackTrace();
+            log.info("httpRequestIO：" + e.getMessage());
         }
         return inputStream;
     }
@@ -132,8 +135,8 @@ public class HttpRequestUtil {
                 result += line;
             }
         } catch (Exception e) {
-            System.out.println("发送GET请求出现异常！" + e);
-            log.debug(ExceptionUtils.getStackTrace(e));
+            e.printStackTrace();
+            log.info("发送GET方法的请求：" + e.getMessage());
         }
         // 使用finally块来关闭输入流
         finally {
@@ -142,7 +145,8 @@ public class HttpRequestUtil {
                     in.close();
                 }
             } catch (Exception e) {
-                log.debug(ExceptionUtils.getStackTrace(e));
+                e.printStackTrace();
+                log.info("发送GET方法的请求：" + e.getMessage());
             }
         }
         return result;
@@ -195,8 +199,8 @@ public class HttpRequestUtil {
                 result += line;
             }
         } catch (Exception e) {
-            System.out.println("发送 POST 请求出现异常！" + e);
-            log.debug(ExceptionUtils.getStackTrace(e));
+            e.printStackTrace();
+            log.info("发送 POST 请求出现异常！" + e.getMessage());
         }
         //使用finally块来关闭输出流、输入流
         finally {
@@ -209,6 +213,7 @@ public class HttpRequestUtil {
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
+                log.info("发送 POST 请求出现异常！" + ex.getMessage());
             }
         }
         return result;
@@ -247,8 +252,10 @@ public class HttpRequestUtil {
             inputStream.close();
         } catch (ConnectException ce) {
             ce.printStackTrace();
+            log.info("发送 POST 请求出现异常！" + ce.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
+            log.info("发送 POST 请求出现异常！" + e.getMessage());
         }
     }
 

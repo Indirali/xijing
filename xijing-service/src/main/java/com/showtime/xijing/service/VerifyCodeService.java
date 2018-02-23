@@ -51,8 +51,8 @@ public class VerifyCodeService {
             log.debug(e.toString());
             e.printStackTrace();
         } catch (YunpianException e) {
-            log.debug(e.toString());
-            Assert.isNull(e, e.getMessage());
+            e.printStackTrace();
+            log.info("短信发送异常：" + e.getMessage());
         }
     }
 

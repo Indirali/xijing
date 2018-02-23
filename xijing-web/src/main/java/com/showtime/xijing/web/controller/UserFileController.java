@@ -4,7 +4,6 @@ import com.showtime.xijing.common.Result;
 import com.showtime.xijing.entity.UserFile;
 import com.showtime.xijing.service.UploadingService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,7 +36,8 @@ public class UserFileController {
         try {
             userFile = uploadingImage.uploadingImage(mf, type);
         } catch (IOException e) {
-            log.debug(ExceptionUtils.getStackTrace(e));
+            e.printStackTrace();
+            log.info("图片上传失败：" + e.getMessage());
             return Result.fail("图片上传失败！");
         }
         return Result.success(userFile);

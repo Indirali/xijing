@@ -1,7 +1,6 @@
 package com.showtime.xijing.convert;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import javax.persistence.AttributeConverter;
 import java.io.UnsupportedEncodingException;
@@ -22,7 +21,8 @@ public class EmojiConverter implements AttributeConverter<String, String> {
         try {
             return s == null ? null : URLEncoder.encode(s, "utf-8");
         } catch (UnsupportedEncodingException e) {
-            log.debug(ExceptionUtils.getStackTrace(e));
+            e.printStackTrace();
+            log.info("Emoji转换异常：" + e.getMessage());
         }
         return null;
     }
@@ -32,7 +32,8 @@ public class EmojiConverter implements AttributeConverter<String, String> {
         try {
             return s == null ? null : URLDecoder.decode(s, "utf-8");
         } catch (UnsupportedEncodingException e) {
-            log.debug(ExceptionUtils.getStackTrace(e));
+            e.printStackTrace();
+            log.info("Emoji转换异常：" + e.getMessage());
         }
         return null;
     }

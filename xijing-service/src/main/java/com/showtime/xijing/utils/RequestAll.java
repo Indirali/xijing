@@ -1,7 +1,6 @@
 package com.showtime.xijing.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -36,7 +35,8 @@ public class RequestAll {
             HttpEntity entity = response.getEntity();
             rec = EntityUtils.toString(entity);
         } catch (IOException e) {
-            log.debug(ExceptionUtils.getStackTrace(e));
+            e.printStackTrace();
+            log.info("httpGet:" + e.getMessage());
         }
         return rec;
     }

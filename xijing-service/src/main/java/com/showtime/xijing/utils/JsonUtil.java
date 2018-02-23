@@ -16,7 +16,8 @@ public class JsonUtil {
         try {
             return objectWriter.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            log.error(e.getMessage());
+            e.printStackTrace();
+            log.info("toJsonString！" + e.getMessage());
             return null;
         }
     }

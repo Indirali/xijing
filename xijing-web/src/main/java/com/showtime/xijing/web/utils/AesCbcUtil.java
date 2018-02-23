@@ -9,7 +9,6 @@ package com.showtime.xijing.web.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.Cipher;
@@ -63,7 +62,8 @@ public class AesCbcUtil {
                 return result;
             }
         } catch (Exception e) {
-            log.debug(ExceptionUtils.getStackTrace(e));
+            e.printStackTrace();
+            log.info("Aes解码失败：" + e.getMessage());
         }
         return null;
     }

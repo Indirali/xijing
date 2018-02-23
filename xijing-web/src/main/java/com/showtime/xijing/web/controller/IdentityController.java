@@ -11,7 +11,6 @@ import com.showtime.xijing.utils.WXRequestUtil;
 import com.showtime.xijing.web.utils.AesCbcUtil;
 import com.showtime.xijing.web.utils.EmojiFilter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,7 +68,8 @@ public class IdentityController {
             }
 
         } catch (Exception e) {
-            log.debug(ExceptionUtils.getStackTrace(e));
+            e.printStackTrace();
+            log.info("解析用户信息失败：" + e.getMessage());
             return Result.fail("用户信息解析失败");
         }
         return Result.success().data("User", user);
@@ -95,6 +95,7 @@ public class IdentityController {
             user.setPhoneNumber(userInfo.getAsJsonObject().get("purePhoneNumber").getAsString());
         } catch (Exception e) {
             e.printStackTrace();
+            log.info("解析用户信息失败：" + e.getMessage());
         }
         userService.save(user);
         return Result.success();
