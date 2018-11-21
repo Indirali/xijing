@@ -1,14 +1,9 @@
 package com.showtime.xijing.web.controller;
 
 import com.showtime.xijing.common.Result;
-import com.showtime.xijing.entity.Recruit;
-import com.showtime.xijing.entity.RecruitInfo;
 import com.showtime.xijing.entity.User;
-import com.showtime.xijing.service.RecruitInfoService;
 import com.showtime.xijing.service.RecruitService;
 import com.showtime.xijing.service.UserService;
-import com.showtime.xijing.service.ValidateService;
-import com.showtime.xijing.web.vo.RecruitVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -26,18 +21,12 @@ public class RecruitController {
 
     private UserService userService;
     private RecruitService recruitService;
-    private ValidateService validateService;
-    private RecruitInfoService recruitInfoService;
 
     @Autowired
     public RecruitController(UserService userService,
-                             RecruitService recruitService,
-                             ValidateService validateService,
-                             RecruitInfoService recruitInfoService) {
+                             RecruitService recruitService) {
         this.userService = userService;
         this.recruitService = recruitService;
-        this.validateService = validateService;
-        this.recruitInfoService = recruitInfoService;
     }
 
     /**
@@ -51,26 +40,6 @@ public class RecruitController {
         return Result.success(recruitService.findAll(pageable));
     }
 
-    /**
-     * 新增/修改招聘信息
-     *
-     * @param recruitVo
-     * @return
-     */
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result saveRecruit(RecruitVo recruitVo) {
-        validateService.validateObject(recruitVo.getRecruit());
-        validateService.validateObjectList(recruitVo.getRecruitInfos());
-        Long[] recruitInfoIds = new Long[recruitVo.getRecruitInfos().size()];
-        for (int i = 0; i < recruitVo.getRecruitInfos().size(); i++) {
-            RecruitInfo base = recruitInfoService.save(recruitVo.getRecruitInfos().get(i));
-            recruitInfoIds[i] = base.getId();
-        }
-        Recruit recruit = recruitVo.getRecruit();
-        recruit.setRecruitInfos(recruitInfoService.findByIdIn(recruitInfoIds));
-        recruitService.save(recruit);
-        return Result.success();
-    }
 
     /**
      * 招聘详细信息

@@ -7,7 +7,7 @@ import com.showtime.xijing.common.utils.IdCardUtils;
 import com.showtime.xijing.entity.User;
 import com.showtime.xijing.service.UserService;
 import com.showtime.xijing.service.VerifyCodeService;
-import com.showtime.xijing.web.vo.UserVo;
+import com.showtime.xijing.vo.UserVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;

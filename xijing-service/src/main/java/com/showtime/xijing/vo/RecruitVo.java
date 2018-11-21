@@ -1,4 +1,4 @@
-package com.showtime.xijing.web.vo;
+package com.showtime.xijing.vo;
 
 import com.showtime.xijing.entity.Recruit;
 import com.showtime.xijing.entity.RecruitInfo;
